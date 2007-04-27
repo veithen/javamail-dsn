@@ -14,6 +14,7 @@ public class TextRFC822Handler extends SimpleDataContentHandler<InternetHeaders>
 		super(InternetHeaders.class, "text/rfc822", "RFC822 Headers");
 	}
 	
+	@Override
 	public InternetHeaders getContent(DataSource dataSource) throws IOException {
 		try {
 			return new InternetHeaders(dataSource.getInputStream());
@@ -23,6 +24,7 @@ public class TextRFC822Handler extends SimpleDataContentHandler<InternetHeaders>
 		}
 	}
 	
+	@Override
 	public void writeTo(InternetHeaders headers, OutputStream os) throws IOException {
 		throw new UnsupportedOperationException();
 	}

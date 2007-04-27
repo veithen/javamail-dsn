@@ -14,6 +14,7 @@ public class DeliveryStatusHandler extends SimpleDataContentHandler<DeliveryStat
 		super(DeliveryStatus.class, "message/delivery-status", "Delivery Status");
 	}
 	
+	@Override
 	public DeliveryStatus getContent(DataSource dataSource) throws IOException {
 		try {
 			return new DeliveryStatus(dataSource.getInputStream());
@@ -23,6 +24,7 @@ public class DeliveryStatusHandler extends SimpleDataContentHandler<DeliveryStat
 		}
 	}
 	
+	@Override
 	public void writeTo(DeliveryStatus object, OutputStream os) throws IOException {
 		throw new UnsupportedOperationException();
 	}

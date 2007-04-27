@@ -16,6 +16,7 @@ public class MultipartReportHandler extends SimpleDataContentHandler<MultipartRe
 		super(MultipartReport.class, "multipart/report", "Multipart Report");
 	}
 	
+	@Override
 	public MultipartReport getContent(DataSource dataSource) throws IOException {
 		try {
 			String reportType = new ContentType(dataSource.getContentType()).getParameter("report-type");
@@ -32,6 +33,7 @@ public class MultipartReportHandler extends SimpleDataContentHandler<MultipartRe
 		}
 	}
 	
+	@Override
 	public void writeTo(MultipartReport object, OutputStream os) throws IOException {
 		throw new UnsupportedOperationException();
 	}
