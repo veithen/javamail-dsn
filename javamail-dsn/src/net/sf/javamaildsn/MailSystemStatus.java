@@ -4,6 +4,8 @@ import java.util.ResourceBundle;
 
 import javax.mail.internet.ParseException;
 
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 /**
  * Class representing an enhanced mail system status code as defined by RFC 3463.
  * 
@@ -46,5 +48,20 @@ public class MailSystemStatus {
 	@Override
 	public String toString() {
 		return clazz + "." + subject + "." + detail;
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(clazz).append(subject).append(detail).toHashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null && obj instanceof MailSystemStatus) {
+			MailSystemStatus cobj = (MailSystemStatus)obj;
+			return clazz == cobj.clazz && subject == cobj.subject && detail == cobj.detail;
+		} else {
+			return false;
+		}
 	}
 }
