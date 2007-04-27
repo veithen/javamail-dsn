@@ -1,0 +1,4 @@
+multipart/report;;x-java-content-handler=net.sf.javamaildsn.MultipartReportHandler
+message/delivery-status;;x-java-content-handler=net.sf.javamaildsn.DeliveryStatusHandler
+text/rfc822;;x-java-content-handler=net.sf.javamaildsn.TextRFC822Handler
+text/rfc822-headers;;x-java-content-handler=net.sf.javamaildsn.TextRFC822Handler
