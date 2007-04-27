@@ -1,0 +1,12 @@
+Reporting-MTA: dns; mail.tamay-dogan.net
+Arrival-Date: Wed, 31 Aug 2005 10:37:18 +0200
+Received-From-MTA: dns; localhost (localhost [127.0.0.1])
+
+Final-Recipient: rfc822; michelle.konzack@freenet.de
+Action: failed
+Status: 5.0.0
+Remote-MTA: dns; mx.freenet.de [194.97.55.148]
+Diagnostic-Code: smtp; 550-Verification failed for <root@tamay-dogan.net>
+        550-unrouteable mail domain "tamay-dogan.net"
+        550 verifying root@tamay-dogan.net failed
+
