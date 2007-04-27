@@ -100,7 +100,18 @@ public class HeaderUtils {
 		}
 	}
 	
+	// TODO: this is probably used only once; so move this
 	public static Diagnostic parseDiagnostic(String value) throws MessagingException {
-		return new SMTPDiagnostic(value);
+		String[] parts = parseTyped(value);
+		if (parts == null) {
+			throw new MessagingException("Invalid diagnostic format");
+		}
+		if (parts[0].equalsIgnoreCase("SMTP")) {
+			return new SMTPDiagnostic(parts[1]);
+		} else if (parts[0].substring(0, 2).equalsIgnoreCase("X-")) {
+			return null; // TODO
+		} else {
+			throw new MessagingException("Unrecognized diagnostic type '" + parts[0] + "'");
+		}
 	}
 }
