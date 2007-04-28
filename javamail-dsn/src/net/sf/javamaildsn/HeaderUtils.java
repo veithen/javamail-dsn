@@ -2,15 +2,34 @@ package net.sf.javamaildsn;
 
 import javax.mail.Address;
 import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.InternetHeaders;
 import javax.mail.internet.ParseException;
 
-import net.sf.javamaildsn.Diagnostic;
-import net.sf.javamaildsn.SMTPDiagnostic;
+import net.sf.javamaildsn.type.TypedFieldParser;
+import net.sf.javamaildsn.type.address.RFC822AddressType;
+import net.sf.javamaildsn.type.address.UnknownAddressType;
+import net.sf.javamaildsn.type.diagnostic.SMTPDiagnosticType;
+import net.sf.javamaildsn.type.diagnostic.UnknownDiagnosticType;
+import net.sf.javamaildsn.type.diagnostic.XPostfixDiagnosticType;
+import net.sf.javamaildsn.type.mtaname.DnsMtaNameType;
+import net.sf.javamaildsn.type.mtaname.UnknownMtaNameType;
 
 // TODO: Section 2.1.1 of RFC 3464 says that "Text that appears in parentheses is considered a comment and not part of the contents of that notification field."
 public class HeaderUtils {
+	private static final TypedFieldParser<String> mtaNameParser = new TypedFieldParser<String>();
+	private static final TypedFieldParser<Address> addressParser = new TypedFieldParser<Address>();
+	private static final TypedFieldParser<Diagnostic> diagnosticParser = new TypedFieldParser<Diagnostic>();
+	
+	static {
+		mtaNameParser.addType("dns", new DnsMtaNameType());
+		mtaNameParser.setDefaultType(new UnknownMtaNameType());
+		addressParser.addType("rfc822", new RFC822AddressType());
+		addressParser.setDefaultType(new UnknownAddressType());
+		diagnosticParser.addType("smtp", new SMTPDiagnosticType());
+		diagnosticParser.addType("x-postfix", new XPostfixDiagnosticType());
+		diagnosticParser.setDefaultType(new UnknownDiagnosticType());
+	}
+	
 	/**
 	 * Get the value of a header with multiplicity 0..1, i.e. that is unique but optional.
 	 * 
@@ -47,6 +66,7 @@ public class HeaderUtils {
 		}
 	}
 	
+	@Deprecated
 	private static String[] parseTyped(String value) {
 		String[] parts = value.split(" *; *");
 		return parts.length == 2 ? parts : null;
@@ -90,29 +110,11 @@ public class HeaderUtils {
 	 * @throws MessagingException if the address type is unrecognized
 	 */
 	public static Address parseAddress(String value) throws MessagingException {
-		String[] parts = parseTyped(value);
-		if (parts == null) {
-			throw new ParseException("Invalid address format in '" + value + "'");
-		}
-		if (parts[0].equalsIgnoreCase("RFC822")) {
-			return new InternetAddress(parts[1].trim());
-		} else {
-			throw new MessagingException("Unrecognized address type '" + parts[0] + "'");
-		}
+		return addressParser.parse(value);
 	}
 	
 	// TODO: this is probably used only once; so move this
 	public static Diagnostic parseDiagnostic(String value) throws MessagingException {
-		String[] parts = parseTyped(value);
-		if (parts == null) {
-			throw new MessagingException("Invalid diagnostic format");
-		}
-		if (parts[0].equalsIgnoreCase("SMTP")) {
-			return new SMTPDiagnostic(parts[1]);
-		} else if (parts[0].equalsIgnoreCase("X-POSTFIX")) {
-			return XPostfixDiagnosticParser.parse(parts[1]);
-		} else {
-			return new UnknownDiagnostic(parts[1]);
-		}
+		return diagnosticParser.parse(value);
 	}
 }

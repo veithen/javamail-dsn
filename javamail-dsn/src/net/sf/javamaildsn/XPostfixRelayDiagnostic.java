@@ -1,15 +1,15 @@
 package net.sf.javamaildsn;
 
-public class XPostfixRelayDiagnostic implements Diagnostic {
+public class XPostfixRelayDiagnostic implements XPostfixDiagnostic {
 	private final String host;
 	private final String altHost;
 	private final SMTPDiagnostic smtpDiagnostic;
 	private final String inReplyTo;
 	
-	public XPostfixRelayDiagnostic(String host, String altHost, String message, String inReplyTo) {
+	public XPostfixRelayDiagnostic(String host, String altHost, SMTPDiagnostic smtpDiagnostic, String inReplyTo) {
 		this.host = host;
 		this.altHost = altHost;
-		smtpDiagnostic = new SMTPDiagnostic(message);
+		this.smtpDiagnostic = smtpDiagnostic;
 		this.inReplyTo = inReplyTo;
 	}
 
