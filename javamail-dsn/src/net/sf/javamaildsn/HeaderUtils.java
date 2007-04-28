@@ -108,6 +108,8 @@ public class HeaderUtils {
 		}
 		if (parts[0].equalsIgnoreCase("SMTP")) {
 			return new SMTPDiagnostic(parts[1]);
+		} else if (parts[0].equalsIgnoreCase("X-POSTFIX")) {
+			return XPostfixDiagnosticParser.parse(parts[1]);
 		} else if (parts[0].substring(0, 2).equalsIgnoreCase("X-")) {
 			return null; // TODO
 		} else {
