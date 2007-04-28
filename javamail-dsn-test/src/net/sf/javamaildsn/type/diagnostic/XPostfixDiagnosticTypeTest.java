@@ -8,6 +8,9 @@ import net.sf.javamaildsn.Diagnostic;
 import net.sf.javamaildsn.SMTPDiagnostic;
 import net.sf.javamaildsn.XPostfixRelayDiagnostic;
 
+/**
+ * @author Andreas Veithen
+ */
 public class XPostfixDiagnosticTypeTest extends TestCase {
 	private final XPostfixDiagnosticType type = new XPostfixDiagnosticType();
 	

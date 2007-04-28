@@ -7,6 +7,9 @@ import net.sf.javamaildsn.PerRecipientDeliveryStatus.Action;
 
 import junit.framework.TestCase;
 
+/**
+ * @author Andreas Veithen
+ */
 public class DeliveryStatusTest extends TestCase {
 	public void testMultilineSmtpDiagnostic() throws MessagingException {
 		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/multiline-smtp-diagnostic"));
