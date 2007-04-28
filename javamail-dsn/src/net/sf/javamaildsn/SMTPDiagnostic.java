@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * 
  * 
@@ -72,5 +74,13 @@ public class SMTPDiagnostic implements Diagnostic {
 	
 	public String[] getMessages() {
 		return messages.toArray(new String[messages.size()]);
+	}
+	
+	public String getMessage() {
+		return StringUtils.join(messages.iterator(), "\n");
+	}
+
+	public String getRootCause() {
+		return getMessage();
 	}
 }

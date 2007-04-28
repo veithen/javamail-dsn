@@ -28,4 +28,8 @@ public class XPostfixRelayDiagnostic implements Diagnostic {
 	public String getInReplyTo() {
 		return inReplyTo;
 	}
+
+	public String getRootCause() {
+		return smtpDiagnostic.getRootCause();
+	}
 }

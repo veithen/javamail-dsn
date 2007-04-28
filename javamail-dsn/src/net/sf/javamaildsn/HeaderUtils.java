@@ -111,10 +111,8 @@ public class HeaderUtils {
 			return new SMTPDiagnostic(parts[1]);
 		} else if (parts[0].equalsIgnoreCase("X-POSTFIX")) {
 			return XPostfixDiagnosticParser.parse(parts[1]);
-		} else if (parts[0].substring(0, 2).equalsIgnoreCase("X-")) {
-			return null; // TODO
 		} else {
-			throw new MessagingException("Unrecognized diagnostic type '" + parts[0] + "'");
+			return new UnknownDiagnostic(parts[1]);
 		}
 	}
 }

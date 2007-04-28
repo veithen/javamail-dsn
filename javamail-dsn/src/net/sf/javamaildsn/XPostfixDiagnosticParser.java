@@ -13,7 +13,7 @@ public class XPostfixDiagnosticParser {
 		if (matcher.matches()) {
 			return new XPostfixRelayDiagnostic(matcher.group(1), matcher.group(2), matcher.group(3), matcher.group(5));
 		} else {
-			return null;
+			return new UnknownDiagnostic(value);
 		}
 	}
 }
