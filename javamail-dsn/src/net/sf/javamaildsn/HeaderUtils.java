@@ -9,6 +9,7 @@ import javax.mail.internet.ParseException;
 import net.sf.javamaildsn.Diagnostic;
 import net.sf.javamaildsn.SMTPDiagnostic;
 
+// TODO: Section 2.1.1 of RFC 3464 says that "Text that appears in parentheses is considered a comment and not part of the contents of that notification field."
 public class HeaderUtils {
 	/**
 	 * Get the value of a header with multiplicity 0..1, i.e. that is unique but optional.
