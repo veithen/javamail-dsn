@@ -1,0 +1,13 @@
+Reporting-MTA: dns; ex.hexago.com
+X-Postfix-Queue-ID: 89645672495
+X-Postfix-Sender: rfc822; cory@fenris.cjb.net
+Arrival-Date: Thu, 7 Dec 2006 12:41:57 -0500 (EST)
+
+Final-Recipient: rfc822; publicfolder+support.go6.support@hexago.com
+Original-Recipient: rfc822;publicfolder+support.go6.support@hexago.com
+Action: failed
+Status: 5.1.1
+Remote-MTA: dns; ex.hexago.com
+Diagnostic-Code: smtp; 550-Mailbox unknown. Either there is no mailbox
+	associated with this 550-name or you do not have authorization to see it.
+	550 5.1.1 User unknown

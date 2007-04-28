@@ -1,0 +1,15 @@
+Reporting-MTA: dns; mx1.qtec.biz
+X-Postfix-Queue-ID: 2784C2B4004
+X-Postfix-Sender: rfc822; fax@qtec-net.de
+Arrival-Date: Sat, 25 Nov 2006 06:20:27 +0100 (CET)
+
+Final-Recipient: rfc822; admin@localhost.qtec.biz
+Original-Recipient: rfc822; admin@mx1.qtec.biz
+Action: failed
+Status: 5.0.0
+Diagnostic-Code: X-Postfix; host
+    /var/lib/imap/socket/lmtp[/var/lib/imap/socket/lmtp] said: 550-Mailbox
+    unknown.  Either there is no mailbox associated with this 550-name or you
+    do not have authorization to see it. 550 5.1.1 User unknown (in reply to
+    RCPT TO command)
+
