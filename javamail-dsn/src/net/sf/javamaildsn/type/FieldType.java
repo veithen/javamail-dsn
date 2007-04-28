@@ -8,7 +8,9 @@ import javax.mail.MessagingException;
 public interface FieldType<T> {
 	/**
 	 * 
-	 * value must be unfolded
+	 * value is unfolded
+	 * value may contain comments
+	 * 
 	 * @param type TODO
 	 * @param value
 	 * 
