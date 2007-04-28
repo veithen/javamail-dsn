@@ -32,4 +32,23 @@ public class XPostfixDiagnosticParserTest extends TestCase {
 		assertEquals("5.6.0 Message contains NUL characters", messages[0]);
 		assertEquals("end of DATA command", relayDiagnostic.getInReplyTo());
 	}
+	
+	public void testMultilineRelayDiagnostic() {
+		Diagnostic diagnostic = XPostfixDiagnosticParser.parse(
+			"host 127.0.0.1[127.0.0.1] said: 550-Mailbox\n" +
+			"\tunknown.  Either there is no mailbox associated with this 550-name or you\n" +
+			"\tdo not have authorization to see it. 550 5.1.1 User unknown (in reply to\n" +
+			"\tRCPT TO command)");
+		assertNotNull(diagnostic);
+		assertEquals(XPostfixRelayDiagnostic.class, diagnostic.getClass());
+		XPostfixRelayDiagnostic relayDiagnostic = (XPostfixRelayDiagnostic)diagnostic;
+		SMTPDiagnostic smtpDiagnostic = relayDiagnostic.getSmtpDiagnostic();
+		assertEquals(550, smtpDiagnostic.getCode());
+		String[] messages = smtpDiagnostic.getMessages();
+		assertEquals(3, messages.length);
+		assertEquals("Mailbox unknown.  Either there is no mailbox associated with this", messages[0]);
+		assertEquals("name or you do not have authorization to see it.", messages[1]);
+		assertEquals("5.1.1 User unknown", messages[2]);
+		assertEquals("end of DATA command", relayDiagnostic.getInReplyTo());
+	}
 }
