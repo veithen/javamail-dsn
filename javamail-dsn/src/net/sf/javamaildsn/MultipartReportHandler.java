@@ -11,6 +11,9 @@ import net.sf.javamaildsn.MultipartReport;
 import net.sf.javamaildsn.MultipartReportDeliveryStatus;
 import net.sf.javamaildsn.SimpleDataContentHandler;
 
+/**
+ * @author Andreas Veithen
+ */
 public class MultipartReportHandler extends SimpleDataContentHandler<MultipartReport> {
 	public MultipartReportHandler() {
 		super(MultipartReport.class, "multipart/report", "Multipart Report");

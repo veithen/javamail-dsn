@@ -1,5 +1,8 @@
 package net.sf.javamaildsn;
 
+/**
+ * @author Andreas Veithen
+ */
 public class XPostfixRelayDiagnostic implements XPostfixDiagnostic {
 	private final String host;
 	private final String altHost;

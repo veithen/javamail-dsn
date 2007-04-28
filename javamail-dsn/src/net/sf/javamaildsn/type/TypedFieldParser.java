@@ -6,6 +6,9 @@ import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeUtility;
 
+/**
+ * @author Andreas Veithen
+ */
 public class TypedFieldParser<T> {
 	private final Map<String,FieldType<? extends T>> types = new HashMap<String,FieldType<? extends T>>();
 	private FieldType<? extends T> defaultType;

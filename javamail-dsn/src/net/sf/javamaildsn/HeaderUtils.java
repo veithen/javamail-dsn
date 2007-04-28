@@ -14,6 +14,9 @@ import net.sf.javamaildsn.type.diagnostic.XPostfixDiagnosticType;
 import net.sf.javamaildsn.type.mtaname.DnsMtaNameType;
 import net.sf.javamaildsn.type.mtaname.UnknownMtaNameType;
 
+/**
+ * @author Andreas Veithen
+ */
 // TODO: Section 2.1.1 of RFC 3464 says that "Text that appears in parentheses is considered a comment and not part of the contents of that notification field."
 public class HeaderUtils {
 	private static final TypedFieldParser<String> mtaNameParser = new TypedFieldParser<String>();

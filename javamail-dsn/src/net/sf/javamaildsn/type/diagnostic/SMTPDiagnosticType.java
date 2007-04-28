@@ -13,6 +13,9 @@ import javax.mail.MessagingException;
 import net.sf.javamaildsn.SMTPDiagnostic;
 import net.sf.javamaildsn.type.FieldType;
 
+/**
+ * @author Andreas Veithen
+ */
 public class SMTPDiagnosticType implements FieldType<SMTPDiagnostic> {
 	private final static Pattern linePattern = Pattern.compile("\\s*(\\d{3})[ -](.*)");
 	

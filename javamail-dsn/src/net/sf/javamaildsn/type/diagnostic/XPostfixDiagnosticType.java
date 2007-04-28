@@ -10,6 +10,9 @@ import net.sf.javamaildsn.XPostfixLocalDiagnostic;
 import net.sf.javamaildsn.XPostfixRelayDiagnostic;
 import net.sf.javamaildsn.type.FieldType;
 
+/**
+ * @author Andreas Veithen
+ */
 public class XPostfixDiagnosticType implements FieldType<XPostfixDiagnostic> {
 	private final static SMTPDiagnosticType smtpDiagnosticType = new SMTPDiagnosticType(); // TODO: this is ugly
 	private final static Pattern relayPattern = Pattern.compile("host (.+)\\[(.+)\\] said: (\\d{3}[ -].*?)( \\(in reply to (.*)\\))?");

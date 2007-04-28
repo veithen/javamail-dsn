@@ -14,6 +14,8 @@ import net.sf.javamaildsn.MimeMessageHeaders;
 
 /**
  * RFC3462
+ * 
+ * @author Andreas Veithen
  */
 public class MultipartReport<C> {
 	private final MimeMultipart content;

@@ -9,6 +9,9 @@ import javax.mail.MessagingException;
 import net.sf.javamaildsn.DeliveryStatus;
 import net.sf.javamaildsn.SimpleDataContentHandler;
 
+/**
+ * @author Andreas Veithen
+ */
 public class DeliveryStatusHandler extends SimpleDataContentHandler<DeliveryStatus> {
 	public DeliveryStatusHandler() {
 		super(DeliveryStatus.class, "message/delivery-status", "Delivery Status");

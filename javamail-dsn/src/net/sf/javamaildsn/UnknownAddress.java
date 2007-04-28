@@ -4,6 +4,9 @@ import javax.mail.Address;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+/**
+ * @author Andreas Veithen
+ */
 public class UnknownAddress extends Address {
 	private static final long serialVersionUID = -7087873424928532764L;
 	

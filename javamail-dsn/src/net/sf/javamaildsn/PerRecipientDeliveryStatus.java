@@ -10,6 +10,9 @@ import net.sf.javamaildsn.Diagnostic;
 import net.sf.javamaildsn.HeaderUtils;
 import net.sf.javamaildsn.MailSystemStatus;
 
+/**
+ * @author Andreas Veithen
+ */
 public class PerRecipientDeliveryStatus {
 	public enum Action {
 		/**

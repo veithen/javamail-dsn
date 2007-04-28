@@ -2,6 +2,9 @@ package net.sf.javamaildsn.type;
 
 import javax.mail.MessagingException;
 
+/**
+ * @author Andreas Veithen
+ */
 public interface FieldType<T> {
 	/**
 	 * 

@@ -9,6 +9,9 @@ import javax.activation.DataContentHandler;
 import javax.activation.DataSource;
 import javax.activation.UnsupportedDataTypeException;
 
+/**
+ * @author Andreas Veithen
+ */
 public abstract class SimpleDataContentHandler<C> implements DataContentHandler {
 	private final ActivationDataFlavor supportedDataFlavor;
 	private final Class<C> representationClass;

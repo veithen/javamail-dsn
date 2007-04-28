@@ -7,6 +7,9 @@ import javax.mail.MessagingException;
 import net.sf.javamaildsn.DeliveryStatus;
 import net.sf.javamaildsn.MultipartReport;
 
+/**
+ * @author Andreas Veithen
+ */
 public class MultipartReportDeliveryStatus extends MultipartReport<DeliveryStatus> {
 	public MultipartReportDeliveryStatus(DataSource dataSource) throws MessagingException, IOException {
 		super(DeliveryStatus.class, dataSource);

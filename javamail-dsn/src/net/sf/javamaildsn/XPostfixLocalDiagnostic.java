@@ -1,5 +1,8 @@
 package net.sf.javamaildsn;
 
+/**
+ * @author Andreas Veithen
+ */
 public class XPostfixLocalDiagnostic implements XPostfixDiagnostic {
 	private final String message;
 	

@@ -9,6 +9,9 @@ import javax.mail.internet.InternetHeaders;
 
 import net.sf.javamaildsn.SimpleDataContentHandler;
 
+/**
+ * @author Andreas Veithen
+ */
 public class TextRFC822Handler extends SimpleDataContentHandler<InternetHeaders> {
 	public TextRFC822Handler() {
 		super(InternetHeaders.class, "text/rfc822", "RFC822 Headers");

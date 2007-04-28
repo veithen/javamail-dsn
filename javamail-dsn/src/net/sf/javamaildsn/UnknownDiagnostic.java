@@ -2,6 +2,9 @@ package net.sf.javamaildsn;
 
 import javax.mail.internet.MimeUtility;
 
+/**
+ * @author Andreas Veithen
+ */
 public class UnknownDiagnostic implements Diagnostic {
 	private final String value;
 	
