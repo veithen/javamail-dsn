@@ -32,7 +32,7 @@ public class DeliveryStatusTest extends TestCase {
 		assertEquals(Action.FAILED, rds.getAction());
 		assertEquals(new MailSystemStatus(5, 0, 0), rds.getStatus());
 		assertEquals("mx.freenet.de", ((DnsMtaName)rds.getRemoteMta()).getDomainName());
-		assertEquals(InetAddress.getByName("194.97.55.148"), ((DnsMtaName)rds.getRemoteMta()).getDomainName());
+		assertEquals(InetAddress.getByName("194.97.55.148"), ((DnsMtaName)rds.getRemoteMta()).getAddress());
 		Diagnostic diagnostic = rds.getDiagnostic();
 		assertNotNull(diagnostic);
 		assertEquals(SMTPDiagnostic.class, diagnostic.getClass());
