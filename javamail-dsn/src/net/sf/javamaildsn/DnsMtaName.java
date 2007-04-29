@@ -10,6 +10,7 @@ public class DnsMtaName implements MtaName {
 	private final InetAddress address;
 	
 	public DnsMtaName(String domainName, InetAddress address) {
+		assert domainName != null || address != null;
 		this.domainName = domainName;
 		this.address = address;
 	}
@@ -22,5 +23,16 @@ public class DnsMtaName implements MtaName {
 		return address;
 	}
 	
-	// TODO: equals, hashCode, toString
+	// TODO: equals, hashCode
+
+	@Override
+	public String toString() {
+		if (domainName != null && address != null) {
+			return domainName + " (" + address.getHostAddress() + ")";
+		} else if (domainName != null) {
+			return domainName;
+		} else {
+			return "[" + address.getHostAddress() + "]";
+		}
+	}
 }
