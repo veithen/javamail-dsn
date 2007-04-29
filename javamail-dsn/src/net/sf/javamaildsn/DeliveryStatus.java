@@ -50,44 +50,44 @@ public class DeliveryStatus {
 	}
 	
 	/**
-	 * Get the host name of the MTA that attempted to perform the delivery, relay, or gateway
+	 * Get the name of the MTA that attempted to perform the delivery, relay, or gateway
      * operation described in this DSN.
      * Since this information is mandatory, an exception will be thrown if it can't be extracted.
      * <p>
      * For more information, see section 2.2.2 of RFC 3464. 
 	 * 
-	 * @return the host name of the reporting MTA
-	 * @throws MessagingException if the host name of the MTA could not be extracted
+	 * @return the name of the reporting MTA
+	 * @throws MessagingException if the name of the MTA could not be extracted
 	 */
-	public String getReportingMtaHostName() throws MessagingException {
+	public MtaName getReportingMta() throws MessagingException {
 		return HeaderUtils.parseMtaName(HeaderUtils.getRequiredUniqueHeader(headers, "Reporting-MTA"));
 	}
 	
 	/**
-	 * Get the host name of the gateway or MTA that translated a foreign (non-Internet) delivery
+	 * Get the name of the gateway or MTA that translated a foreign (non-Internet) delivery
 	 * status notification into this DSN. If the DSN was not translated by a gateway from a
 	 * foreign system into DSN format, <code>null</code> is returned. If the DSN was translated by
-	 * a gateway but the host name could not be extracted, an exception is thrown.
+	 * a gateway but the name could not be extracted, an exception is thrown.
      * <p>
      * For more information, see section 2.2.3 of RFC 3464.
 	 * 
-	 * @return the host name of the translating gateway or <code>null</code> if the DSN was not translated
-	 * @throws MessagingException if the host name of the translating gateway could not be extracted
+	 * @return the name of the translating gateway or <code>null</code> if the DSN was not translated
+	 * @throws MessagingException if the name of the translating gateway could not be extracted
 	 */
-    public String getDsnGatewayHostName() throws MessagingException {
+    public MtaName getDsnGateway() throws MessagingException {
 		return HeaderUtils.parseMtaName(HeaderUtils.getRequiredUniqueHeader(headers, "DSN-Gateway"));
 	}
     
     /**
-     * Get the host name of the MTA from which the message was received. If this information is
+     * Get the name of the MTA from which the message was received. If this information is
      * not available or could not be extracted, <code>null</code> is returned.
      * <p>
      * For more information, see section 2.2.4 of RFC 3464.
      *  
-     * @return the host name of the MTA from which the message was received, or <code>null</code>
+     * @return the name of the MTA from which the message was received, or <code>null</code>
      * if this information is not available
      */
-	public String getReceivedFromMtaHostName() {
+	public MtaName getReceivedFromMta() {
 		try {
 			String value = HeaderUtils.getOptionalUniqueHeader(headers, "Received-From-MTA");
 			return value == null ? null : HeaderUtils.parseMtaName(value);

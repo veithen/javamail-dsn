@@ -19,7 +19,7 @@ import net.sf.javamaildsn.type.mtaname.UnknownMtaNameType;
  */
 // TODO: Section 2.1.1 of RFC 3464 says that "Text that appears in parentheses is considered a comment and not part of the contents of that notification field."
 public class HeaderUtils {
-	private static final TypedFieldParser<String> mtaNameParser = new TypedFieldParser<String>();
+	private static final TypedFieldParser<MtaName> mtaNameParser = new TypedFieldParser<MtaName>();
 	private static final TypedFieldParser<Address> addressParser = new TypedFieldParser<Address>();
 	private static final TypedFieldParser<Diagnostic> diagnosticParser = new TypedFieldParser<Diagnostic>();
 	
@@ -69,12 +69,6 @@ public class HeaderUtils {
 		}
 	}
 	
-	@Deprecated
-	private static String[] parseTyped(String value) {
-		String[] parts = value.split(" *; *");
-		return parts.length == 2 ? parts : null;
-	}
-	
 	/**
 	 * Parse the value of an MTA name header as defined in section 9.3 of RFC 3461 and referred to in
 	 * section 2.1.2 of RFC 3464 and
@@ -88,16 +82,8 @@ public class HeaderUtils {
 	 * @throws ParseException if the format of the value is incorrect
 	 * @throws MessagingException if the MTA name type is not "dns"
 	 */
-	public static String parseMtaName(String value) throws MessagingException {
-		String[] parts = parseTyped(value);
-		if (parts == null) {
-			throw new ParseException("Invalid MTA format in '" + value + "'");
-		}
-		if (parts[0].equalsIgnoreCase("dns")) {
-			return parts[1];
-		} else {
-			throw new MessagingException("Unrecognized MTA name type '" + parts[0] + "'");
-		}
+	public static MtaName parseMtaName(String value) throws MessagingException {
+		return mtaNameParser.parse(value);
 	}
 	
 	/**

@@ -81,7 +81,7 @@ public class PerRecipientDeliveryStatus {
 		}
 	}
 	
-	public String getRemoteMtaHostName() throws MessagingException {
+	public MtaName getRemoteMta() throws MessagingException {
 		String value = HeaderUtils.getOptionalUniqueHeader(headers, "Remote-MTA");
 		return value == null ? null : HeaderUtils.parseMtaName(value);
 	}
