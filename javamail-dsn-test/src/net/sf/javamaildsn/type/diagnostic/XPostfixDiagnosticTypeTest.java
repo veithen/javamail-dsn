@@ -60,6 +60,6 @@ public class XPostfixDiagnosticTypeTest extends TestCase {
 		assertEquals("Mailbox unknown.  Either there is no mailbox associated with this", messages[0]);
 		assertEquals("name or you do not have authorization to see it.", messages[1]);
 		assertEquals("5.1.1 User unknown", messages[2]);
-		assertEquals("end of DATA command", relayDiagnostic.getInReplyTo());
+		assertEquals("RCPT TO command", relayDiagnostic.getInReplyTo());
 	}
 }
