@@ -1,0 +1,8 @@
+Reporting-MTA: dns; imta05a2.registeredsite.com
+Arrival-Date: Sun, 23 Feb 2003 16:09:00 -0500
+Received-From-MTA: dns; inbound-mx1.atl.registeredsite.com (64.224.219.89)
+
+Final-Recipient: RFC822; <tedshort@rampitusa.com>
+Action: delivered
+Status: 2.1.5
+

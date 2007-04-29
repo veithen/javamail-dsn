@@ -1,0 +1,10 @@
+Reporting-MTA: dns; relay1.example.com
+Arrival-Date: Mon, 05 Jul 1999 14:55:26 -0400
+Received-From-MTA: unknown; localhost (uid 501)
+
+Final-Recipient: rfc822; nosuchuser@relay2.example.com
+Action: failed
+Status: 5.0.0
+Remote-MTA: dns; [127.0.0.1]
+Diagnostic-Code: smtp; 550 Sorry, no mailbox here by that name. (#5.1.1)
+
