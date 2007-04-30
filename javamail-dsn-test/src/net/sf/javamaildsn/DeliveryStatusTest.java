@@ -65,7 +65,8 @@ public class DeliveryStatusTest extends TestCase {
 		assertEquals(3, messages.length);
 		assertEquals("Mailbox unknown. Either there is no mailbox associated with this", messages[0]);
 		assertEquals("name or you do not have authorization to see it.", messages[1]);
-		assertEquals("5.1.1 User unknown", messages[2]);
+		assertEquals("User unknown", messages[2]);
+		assertEquals(new MailSystemStatus(5, 1, 1), smtpDiagnostic.getStatus());
 	}
 	
 	public void testReceivedFromMta() throws Exception {
@@ -96,8 +97,9 @@ public class DeliveryStatusTest extends TestCase {
 		assertEquals(554, smtpDiagnostic.getCode());
 		String[] messages = smtpDiagnostic.getMessages();
 		assertEquals(1, messages.length);
-		assertEquals("mail server permanently rejected message (#5.3.0)", messages[0]);
+		assertEquals("mail server permanently rejected message", messages[0]);
 		assertEquals("end of DATA command", postfixDiagnostic.getInReplyTo());
+		assertEquals(new MailSystemStatus(5, 3, 0), smtpDiagnostic.getStatus());
 	}
 	
 	public void testXPostfixMultilineLMTP() throws MessagingException {
@@ -119,7 +121,8 @@ public class DeliveryStatusTest extends TestCase {
 		assertEquals(3, messages.length);
 		assertEquals("Mailbox unknown.  Either there is no mailbox associated with this", messages[0]);
 		assertEquals("name or you do not have authorization to see it.", messages[1]);
-		assertEquals("5.1.1 User unknown", messages[2]);
+		assertEquals("User unknown", messages[2]);
 		assertEquals("RCPT TO command", postfixDiagnostic.getInReplyTo());
+		assertEquals(new MailSystemStatus(5, 1, 1), smtpDiagnostic.getStatus());
 	}
 }

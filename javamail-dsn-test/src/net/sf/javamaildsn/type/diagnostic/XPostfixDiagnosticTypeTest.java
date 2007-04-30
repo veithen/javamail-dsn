@@ -5,6 +5,7 @@ import javax.mail.internet.MimeUtility;
 
 import junit.framework.TestCase;
 import net.sf.javamaildsn.Diagnostic;
+import net.sf.javamaildsn.MailSystemStatus;
 import net.sf.javamaildsn.SMTPDiagnostic;
 import net.sf.javamaildsn.XPostfixRelayDiagnostic;
 
@@ -40,8 +41,9 @@ public class XPostfixDiagnosticTypeTest extends TestCase {
 		assertEquals(554, smtpDiagnostic.getCode());
 		String[] messages = smtpDiagnostic.getMessages();
 		assertEquals(1, messages.length);
-		assertEquals("5.6.0 Message contains NUL characters", messages[0]);
+		assertEquals("Message contains NUL characters", messages[0]);
 		assertEquals("end of DATA command", relayDiagnostic.getInReplyTo());
+		assertEquals(new MailSystemStatus(5, 6, 0), smtpDiagnostic.getStatus());
 	}
 	
 	public void testMultilineRelayDiagnostic() throws MessagingException {
@@ -59,7 +61,8 @@ public class XPostfixDiagnosticTypeTest extends TestCase {
 		assertEquals(3, messages.length);
 		assertEquals("Mailbox unknown.  Either there is no mailbox associated with this", messages[0]);
 		assertEquals("name or you do not have authorization to see it.", messages[1]);
-		assertEquals("5.1.1 User unknown", messages[2]);
+		assertEquals("User unknown", messages[2]);
 		assertEquals("RCPT TO command", relayDiagnostic.getInReplyTo());
+		assertEquals(new MailSystemStatus(5, 1, 1), smtpDiagnostic.getStatus());
 	}
 }
