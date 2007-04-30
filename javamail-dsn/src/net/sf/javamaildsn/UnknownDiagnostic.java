@@ -11,6 +11,10 @@ public class UnknownDiagnostic implements Diagnostic {
 	public UnknownDiagnostic(String value) {
 		this.value = MimeUtility.unfold(value);
 	}
+	
+	public MailSystemStatus getStatus() {
+		return null;
+	}
 
 	public String getRootCause() {
 		return value;

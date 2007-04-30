@@ -32,6 +32,10 @@ public class XPostfixRelayDiagnostic implements XPostfixDiagnostic {
 		return inReplyTo;
 	}
 
+	public MailSystemStatus getStatus() {
+		return smtpDiagnostic.getStatus();
+	}
+
 	public String getRootCause() {
 		return smtpDiagnostic.getRootCause();
 	}
