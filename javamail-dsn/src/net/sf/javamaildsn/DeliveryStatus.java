@@ -30,6 +30,8 @@ public class DeliveryStatus {
 	private final InternetHeaders headers;
 	private final Map<Address,PerRecipientDeliveryStatus> recip = new LinkedHashMap<Address,PerRecipientDeliveryStatus>();
 	
+	private MtaName cachedReportingMta;
+	
 	public DeliveryStatus(InputStream is) throws MessagingException {
 		headers = new InternetHeaders(is);
 		while (true) {
@@ -60,7 +62,10 @@ public class DeliveryStatus {
 	 * @throws MessagingException if the name of the MTA could not be extracted
 	 */
 	public MtaName getReportingMta() throws MessagingException {
-		return HeaderUtils.parseMtaName(HeaderUtils.getRequiredUniqueHeader(headers, "Reporting-MTA"));
+		if (cachedReportingMta == null) {
+			cachedReportingMta = HeaderUtils.parseMtaName(HeaderUtils.getRequiredUniqueHeader(headers, "Reporting-MTA"));
+		}
+		return cachedReportingMta;
 	}
 	
 	/**
