@@ -67,6 +67,16 @@ public class PerRecipientDeliveryStatus {
 	
 	private final InternetHeaders headers;
 	
+	public Action getAction() throws MessagingException {
+		String value = HeaderUtils.getRequiredUniqueHeader(headers, "Action");
+		try {
+			return Action.valueOf(value.toUpperCase());
+		}
+		catch (IllegalArgumentException ex) {
+			throw new ParseException("Unexpected action '" + value + "'");
+		}
+	}
+	
 	public MailSystemStatus getStatus() throws MessagingException {
 		return new MailSystemStatus(HeaderUtils.stripComment(HeaderUtils.getRequiredUniqueHeader(headers, "Status")));
 	}
@@ -89,7 +99,6 @@ public class PerRecipientDeliveryStatus {
 	
 	private Address finalRecipient;
 	private Address originalRecipient;
-	private Action action;
 	
 	public PerRecipientDeliveryStatus(InputStream is) throws MessagingException {
 		headers = new InternetHeaders(is);
@@ -98,25 +107,8 @@ public class PerRecipientDeliveryStatus {
 			String s = HeaderUtils.getOptionalUniqueHeader(headers, "Original-Recipient");
 			originalRecipient = s == null ? null : HeaderUtils.parseAddress(s);
 		}
-		{
-			String s = HeaderUtils.getRequiredUniqueHeader(headers, "Action");
-			if (s.equals("failed")) {
-				action = Action.FAILED;
-			} else if (s.equals("delayed")) {
-				action = Action.DELAYED;
-			} else if (s.equals("delivered")) {
-				action = Action.DELIVERED;
-			} else if (s.equals("relayed")) {
-				action = Action.RELAYED;
-			} else if (s.equals("expanded")) {
-				action = Action.EXPANDED;
-			} else {
-				throw new ParseException("Unexpected action '" + s + "'");
-			}
-		}
 	}
 	
 	public Address getFinalRecipient() { return finalRecipient; }
 	public Address getOriginalRecipient() { return originalRecipient; }
-	public Action getAction() { return action; }
 }
