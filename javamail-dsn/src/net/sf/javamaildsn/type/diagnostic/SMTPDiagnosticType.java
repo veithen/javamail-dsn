@@ -2,9 +2,12 @@ package net.sf.javamaildsn.type.diagnostic;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.mail.MessagingException;
 
+import net.sf.javamaildsn.MailSystemStatus;
 import net.sf.javamaildsn.SMTPDiagnostic;
 import net.sf.javamaildsn.type.FieldType;
 
@@ -12,6 +15,9 @@ import net.sf.javamaildsn.type.FieldType;
  * @author Andreas Veithen
  */
 public class SMTPDiagnosticType implements FieldType<SMTPDiagnostic> {
+	private final static Pattern statusPrefixPattern = Pattern.compile("(" + MailSystemStatus.PATTERN + ")\\s(.*)");
+	private final static Pattern statusCommentPattern = Pattern.compile("(.*)\\s\\(#(" + MailSystemStatus.PATTERN + ")\\)");
+	
 	public SMTPDiagnostic parse(String type, String value) throws MessagingException {
 		if (value.length() < 4) {
 			throw new MessagingException("Invalid SMTP diagnostic format");
@@ -19,6 +25,7 @@ public class SMTPDiagnosticType implements FieldType<SMTPDiagnostic> {
 		List<String> messages = new LinkedList<String>();
 		String codeString = value.substring(0, 3);
 		int code;
+		MailSystemStatus status = null;
 		boolean hasMoreLines;
 		try {
 			code = Integer.parseInt(codeString);
@@ -50,10 +57,19 @@ public class SMTPDiagnosticType implements FieldType<SMTPDiagnostic> {
 					}
 				}
 			} else {
-				messages.add(value.substring(index));
+				String message = value.substring(index);
+				Matcher matcher;
+				if ((matcher = statusPrefixPattern.matcher(message)).matches()) {
+					status = new MailSystemStatus(matcher.group(1));
+					message = matcher.group(2);
+				} else if ((matcher = statusCommentPattern.matcher(message)).matches()) {
+					message = matcher.group(1);
+					status = new MailSystemStatus(matcher.group(2));
+				}
+				messages.add(message);
 				break;
 			}
 		}
-		return new SMTPDiagnostic(code, messages.toArray(new String[messages.size()]));
+		return new SMTPDiagnostic(code, status, messages.toArray(new String[messages.size()]));
 	}
 }

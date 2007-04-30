@@ -13,15 +13,21 @@ import org.apache.commons.lang.StringUtils;
  */
 public class SMTPDiagnostic implements Diagnostic {
 	private final int code;
+	private final MailSystemStatus status;
 	private final String[] messages;
 	
-	public SMTPDiagnostic(int code, String[] messages) {
+	public SMTPDiagnostic(int code, MailSystemStatus status, String[] messages) {
 		this.code = code;
+		this.status = status;
 		this.messages = messages;
 	}
 
 	public int getCode() {
 		return code;
+	}
+
+	public MailSystemStatus getStatus() {
+		return status;
 	}
 	
 	public String[] getMessages() {

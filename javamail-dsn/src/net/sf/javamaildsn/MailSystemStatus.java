@@ -1,6 +1,7 @@
 package net.sf.javamaildsn;
 
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import javax.mail.internet.ParseException;
 
@@ -13,6 +14,8 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  *
  */
 public class MailSystemStatus {
+	public final static Pattern PATTERN = Pattern.compile("[1-5]\\.\\d{1,3}\\.\\d{1,3}");
+	
 	private final static ResourceBundle messages = ResourceBundle.getBundle(MailSystemStatus.class.getName());
 	
 	private final int clazz;
