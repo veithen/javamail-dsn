@@ -1,0 +1,12 @@
+Reporting-MTA: dns; avas-mx06.fibertel.com.ar
+Arrival-Date: Wed, 20 Oct 2004 09:47:40 -0300
+Local-Spool-ID: S245889AbUJTMrk
+
+Original-Recipient: rfc822;info@princecooke.com
+Final-Recipient: RFC822;info@princecooke.com
+Action: failed
+Status: 5.2.3 (Some content related rejection, size ? text ?)
+Remote-MTA: dns; smtp-int.fibertel.com.ar (24.232.0.160|25|24.232.0.189|57978)
+Last-Attempt-Date: Wed, 20 Oct 2004 09:47:43 -0300
+Diagnostic-Code: smtp; 552 (RCPT TO:<info@princecooke.com> Mailbox disk quota exceeded)
+

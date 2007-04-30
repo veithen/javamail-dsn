@@ -75,6 +75,12 @@ public class DeliveryStatusTest extends TestCase {
 		assertEquals(InetAddress.getByName("64.224.219.89"), mtaName.getAddress());
 	}
 	
+	public void testStatusWithComment() throws MessagingException {
+		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/status-with-comment"));
+		PerRecipientDeliveryStatus rds = ds.getPerRecipientParts()[0];
+		assertEquals(new MailSystemStatus(5, 2, 3), rds.getStatus());
+	}
+	
 	public void testXPostfixHostSaid() throws MessagingException {
 		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/x-postfix-host-said"));
 		assertEquals("office.kde.org", ((DnsMtaName)ds.getReportingMta()).getDomainName());
