@@ -15,7 +15,7 @@ public class XPostfixRelayDiagnostic implements XPostfixDiagnostic {
 		this.smtpDiagnostic = smtpDiagnostic;
 		this.inReplyTo = inReplyTo;
 	}
-
+	
 	public String getHost() {
 		return host;
 	}
@@ -31,12 +31,20 @@ public class XPostfixRelayDiagnostic implements XPostfixDiagnostic {
 	public String getInReplyTo() {
 		return inReplyTo;
 	}
-
+	
+	public int getCode() {
+		return -1;
+	}
+	
 	public MailSystemStatus getStatus() {
-		return smtpDiagnostic.getStatus();
+		return null;
+	}
+	
+	public String getMessage() {
+		return null;
 	}
 
-	public String getRootCause() {
-		return smtpDiagnostic.getRootCause();
+	public Cause getCause() {
+		return new Cause(null /* TODO */, smtpDiagnostic.getCode(), smtpDiagnostic.getStatus(), smtpDiagnostic.getMessage());
 	}
 }

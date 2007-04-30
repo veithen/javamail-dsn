@@ -4,6 +4,8 @@ package net.sf.javamaildsn;
  * @author Andreas Veithen
  */
 public interface Diagnostic {
+	int getCode();
 	MailSystemStatus getStatus();
-	String getRootCause();
+	String getMessage();
+	Cause getCause();
 }

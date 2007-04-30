@@ -37,8 +37,8 @@ public class SMTPDiagnostic implements Diagnostic {
 	public String getMessage() {
 		return StringUtils.join(messages, "\n");
 	}
-
-	public String getRootCause() {
-		return getMessage();
+	
+	public Cause getCause() {
+		return null;
 	}
 }

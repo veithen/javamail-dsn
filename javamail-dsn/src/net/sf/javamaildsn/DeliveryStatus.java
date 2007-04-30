@@ -34,7 +34,7 @@ public class DeliveryStatus {
 		headers = new InternetHeaders(is);
 		while (true) {
 			try {
-				PerRecipientDeliveryStatus recipDSN = new PerRecipientDeliveryStatus(is);
+				PerRecipientDeliveryStatus recipDSN = new PerRecipientDeliveryStatus(this, is);
 				// TODO: we should also hash on original recipients
 				recip.put(recipDSN.getFinalRecipient(), recipDSN);
 			}

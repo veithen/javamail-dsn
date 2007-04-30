@@ -65,6 +65,7 @@ public class PerRecipientDeliveryStatus {
 		EXPANDED
 	};
 	
+	private final DeliveryStatus deliveryStatus;
 	private final InternetHeaders headers;
 	
 	public Action getAction() throws MessagingException {
@@ -96,11 +97,33 @@ public class PerRecipientDeliveryStatus {
 		return value == null ? null : HeaderUtils.parseMtaName(value);
 	}
 	
+	public Cause getCause() throws MessagingException {
+		Diagnostic diagnostic = getDiagnostic();
+		Cause cause = diagnostic == null ? null : diagnostic.getCause();
+		if (cause != null) {
+			return cause;
+		} else {
+			MtaName mta;
+			MailSystemStatus status;
+			MtaName remoteMta = getRemoteMta();
+			if (remoteMta != null) {
+				mta = remoteMta;
+				// Only report the status from the diagnostic; if the delivery failure is cause by a
+				// remote MTA, the status reported in the Status header is not reliable.
+				status = diagnostic.getStatus();
+			} else {
+				mta = deliveryStatus.getReportingMta();
+				status = getStatus();
+			}
+			return new Cause(mta, diagnostic == null ? -1 : diagnostic.getCode(), status, diagnostic == null ? null : diagnostic.getMessage());
+		}
+	}
 	
 	private Address finalRecipient;
 	private Address originalRecipient;
 	
-	public PerRecipientDeliveryStatus(InputStream is) throws MessagingException {
+	public PerRecipientDeliveryStatus(DeliveryStatus deliveryStatus, InputStream is) throws MessagingException {
+		this.deliveryStatus = deliveryStatus;
 		headers = new InternetHeaders(is);
 		finalRecipient = HeaderUtils.parseAddress(HeaderUtils.getRequiredUniqueHeader(headers, "Final-Recipient"));
 		{

@@ -10,11 +10,19 @@ public class XPostfixLocalDiagnostic implements XPostfixDiagnostic {
 		this.message = message;
 	}
 	
+	public int getCode() {
+		return -1;
+	}
+	
 	public MailSystemStatus getStatus() {
 		return null;
 	}
 
-	public String getRootCause() {
+	public String getMessage() {
 		return message;
+	}
+	
+	public Cause getCause() {
+		return null;
 	}
 }
