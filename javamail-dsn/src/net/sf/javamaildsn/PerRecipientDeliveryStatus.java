@@ -68,7 +68,7 @@ public class PerRecipientDeliveryStatus {
 	private final InternetHeaders headers;
 	
 	public MailSystemStatus getStatus() throws MessagingException {
-		return new MailSystemStatus(HeaderUtils.getRequiredUniqueHeader(headers, "Status"));
+		return new MailSystemStatus(HeaderUtils.stripComment(HeaderUtils.getRequiredUniqueHeader(headers, "Status")));
 	}
 	
 	// TODO: rename to getDiagnosticCode

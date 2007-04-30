@@ -1,5 +1,8 @@
 package net.sf.javamaildsn;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.mail.Address;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetHeaders;
@@ -105,5 +108,12 @@ public class HeaderUtils {
 	// TODO: this is probably used only once; so move this
 	public static Diagnostic parseDiagnostic(String value) throws MessagingException {
 		return diagnosticParser.parse(value);
+	}
+	
+	private final static Pattern commentPattern = Pattern.compile("(.*)\\s\\(.*\\)");
+	
+	public static String stripComment(String value) {
+		Matcher matcher = commentPattern.matcher(value);
+		return matcher.matches() ? matcher.group(1) : value;
 	}
 }
