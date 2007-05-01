@@ -6,7 +6,7 @@ import javax.mail.internet.MimeUtility;
 import junit.framework.TestCase;
 import net.sf.javamaildsn.Diagnostic;
 import net.sf.javamaildsn.MailSystemStatus;
-import net.sf.javamaildsn.SMTPDiagnostic;
+import net.sf.javamaildsn.SMTPReply;
 import net.sf.javamaildsn.XPostfixRelayDiagnostic;
 
 /**
@@ -22,9 +22,9 @@ public class XPostfixDiagnosticTypeTest extends TestCase {
 		XPostfixRelayDiagnostic relayDiagnostic = (XPostfixRelayDiagnostic)diagnostic;
 		assertEquals("mx.example.com", relayDiagnostic.getHost());
 		assertEquals("10.0.0.1", relayDiagnostic.getAltHost());
-		SMTPDiagnostic smtpDiagnostic = relayDiagnostic.getSmtpDiagnostic();
-		assertEquals(550, smtpDiagnostic.getCode());
-		String[] messages = smtpDiagnostic.getMessages();
+		SMTPReply smtpReply = relayDiagnostic.getSmtpReply();
+		assertEquals(550, smtpReply.getCode());
+		String[] messages = smtpReply.getMessages();
 		assertEquals(1, messages.length);
 		assertEquals("Error: Message content rejected", messages[0]);
 	}
@@ -37,13 +37,13 @@ public class XPostfixDiagnosticTypeTest extends TestCase {
 		assertNotNull(diagnostic);
 		assertEquals(XPostfixRelayDiagnostic.class, diagnostic.getClass());
 		XPostfixRelayDiagnostic relayDiagnostic = (XPostfixRelayDiagnostic)diagnostic;
-		SMTPDiagnostic smtpDiagnostic = relayDiagnostic.getSmtpDiagnostic();
-		assertEquals(554, smtpDiagnostic.getCode());
-		String[] messages = smtpDiagnostic.getMessages();
+		SMTPReply smtpReply = relayDiagnostic.getSmtpReply();
+		assertEquals(554, smtpReply.getCode());
+		String[] messages = smtpReply.getMessages();
 		assertEquals(1, messages.length);
 		assertEquals("Message contains NUL characters", messages[0]);
 		assertEquals("end of DATA command", relayDiagnostic.getInReplyTo());
-		assertEquals(new MailSystemStatus(5, 6, 0), smtpDiagnostic.getStatus());
+		assertEquals(new MailSystemStatus(5, 6, 0), smtpReply.getStatus());
 	}
 	
 	public void testMultilineRelayDiagnostic() throws MessagingException {
@@ -55,14 +55,14 @@ public class XPostfixDiagnosticTypeTest extends TestCase {
 		assertNotNull(diagnostic);
 		assertEquals(XPostfixRelayDiagnostic.class, diagnostic.getClass());
 		XPostfixRelayDiagnostic relayDiagnostic = (XPostfixRelayDiagnostic)diagnostic;
-		SMTPDiagnostic smtpDiagnostic = relayDiagnostic.getSmtpDiagnostic();
-		assertEquals(550, smtpDiagnostic.getCode());
-		String[] messages = smtpDiagnostic.getMessages();
+		SMTPReply smtpReply = relayDiagnostic.getSmtpReply();
+		assertEquals(550, smtpReply.getCode());
+		String[] messages = smtpReply.getMessages();
 		assertEquals(3, messages.length);
 		assertEquals("Mailbox unknown.  Either there is no mailbox associated with this", messages[0]);
 		assertEquals("name or you do not have authorization to see it.", messages[1]);
 		assertEquals("User unknown", messages[2]);
 		assertEquals("RCPT TO command", relayDiagnostic.getInReplyTo());
-		assertEquals(new MailSystemStatus(5, 1, 1), smtpDiagnostic.getStatus());
+		assertEquals(new MailSystemStatus(5, 1, 1), smtpReply.getStatus());
 	}
 }

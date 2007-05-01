@@ -93,13 +93,13 @@ public class DeliveryStatusTest extends TestCase {
 		assertNotNull(diagnostic);
 		assertEquals(XPostfixRelayDiagnostic.class, diagnostic.getClass());
 		XPostfixRelayDiagnostic postfixDiagnostic = (XPostfixRelayDiagnostic)diagnostic;
-		SMTPDiagnostic smtpDiagnostic = postfixDiagnostic.getSmtpDiagnostic();
-		assertEquals(554, smtpDiagnostic.getCode());
-		String[] messages = smtpDiagnostic.getMessages();
+		SMTPReply smtpReply = postfixDiagnostic.getSmtpReply();
+		assertEquals(554, smtpReply.getCode());
+		String[] messages = smtpReply.getMessages();
 		assertEquals(1, messages.length);
 		assertEquals("mail server permanently rejected message", messages[0]);
 		assertEquals("end of DATA command", postfixDiagnostic.getInReplyTo());
-		assertEquals(new MailSystemStatus(5, 3, 0), smtpDiagnostic.getStatus());
+		assertEquals(new MailSystemStatus(5, 3, 0), smtpReply.getStatus());
 	}
 	
 	public void testXPostfixMultilineLMTP() throws MessagingException {
@@ -115,14 +115,14 @@ public class DeliveryStatusTest extends TestCase {
 		assertNotNull(diagnostic);
 		assertEquals(XPostfixRelayDiagnostic.class, diagnostic.getClass());
 		XPostfixRelayDiagnostic postfixDiagnostic = (XPostfixRelayDiagnostic)diagnostic;
-		SMTPDiagnostic smtpDiagnostic = postfixDiagnostic.getSmtpDiagnostic();
-		assertEquals(550, smtpDiagnostic.getCode());
-		String[] messages = smtpDiagnostic.getMessages();
+		SMTPReply smtpReply = postfixDiagnostic.getSmtpReply();
+		assertEquals(550, smtpReply.getCode());
+		String[] messages = smtpReply.getMessages();
 		assertEquals(3, messages.length);
 		assertEquals("Mailbox unknown.  Either there is no mailbox associated with this", messages[0]);
 		assertEquals("name or you do not have authorization to see it.", messages[1]);
 		assertEquals("User unknown", messages[2]);
 		assertEquals("RCPT TO command", postfixDiagnostic.getInReplyTo());
-		assertEquals(new MailSystemStatus(5, 1, 1), smtpDiagnostic.getStatus());
+		assertEquals(new MailSystemStatus(5, 1, 1), smtpReply.getStatus());
 	}
 }
