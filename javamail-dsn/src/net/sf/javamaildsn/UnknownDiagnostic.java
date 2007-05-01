@@ -6,10 +6,10 @@ import javax.mail.internet.MimeUtility;
  * @author Andreas Veithen
  */
 public class UnknownDiagnostic implements Diagnostic {
-	private final String value;
+	private final StatusMessage message;
 	
 	public UnknownDiagnostic(String value) {
-		this.value = MimeUtility.unfold(value);
+		message = new SingleLineStatusMessage(MimeUtility.unfold(value));
 	}
 	
 	public MtaName getMta() {
@@ -24,7 +24,7 @@ public class UnknownDiagnostic implements Diagnostic {
 		return null;
 	}
 	
-	public String getMessage() {
-		return value;
+	public StatusMessage getMessage() {
+		return message;
 	}
 }

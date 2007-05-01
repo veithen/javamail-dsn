@@ -7,5 +7,5 @@ public interface Diagnostic {
 	MtaName getMta();
 	int getCode();
 	MailSystemStatus getStatus();
-	String getMessage();
+	StatusMessage getMessage();
 }

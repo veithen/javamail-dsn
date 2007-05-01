@@ -1,7 +1,5 @@
 package net.sf.javamaildsn;
 
-import org.apache.commons.lang.StringUtils;
-
 /**
  * 
  * 
@@ -34,11 +32,7 @@ public class SMTPDiagnostic implements Diagnostic {
 		return status;
 	}
 	
-	public String[] getMessages() {
-		return reply.getMessages();
-	}
-	
-	public String getMessage() {
-		return StringUtils.join(reply.getMessages(), "\n");
+	public StatusMessage getMessage() {
+		return reply.getMessage();
 	}
 }

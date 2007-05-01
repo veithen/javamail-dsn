@@ -2,8 +2,6 @@ package net.sf.javamaildsn;
 
 import net.sf.javamaildsn.type.diagnostic.PostfixMtaName;
 
-import org.apache.commons.lang.StringUtils;
-
 /**
  * @author Andreas Veithen
  */
@@ -38,7 +36,7 @@ public class XPostfixRelayDiagnostic implements XPostfixDiagnostic {
 		return smtpReply.getStatus();
 	}
 	
-	public String getMessage() {
-		return StringUtils.join(smtpReply.getMessages(), "\n");
+	public StatusMessage getMessage() {
+		return smtpReply.getMessage();
 	}
 }

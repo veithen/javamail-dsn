@@ -13,13 +13,13 @@ public class SMTPReply {
 	
 	private final int code;
 	private final MailSystemStatus status;
-	private final String[] messages;
+	private final StatusMessage message;
 	
 	public SMTPReply(String value) throws MessagingException {
 		if (value.length() < 4) {
 			throw new MessagingException("Invalid SMTP diagnostic format");
 		}
-		List<String> messages = new LinkedList<String>();
+		List<String> lines = new LinkedList<String>();
 		String codeString = value.substring(0, 3);
 		boolean hasMoreLines;
 		try {
@@ -45,7 +45,7 @@ public class SMTPReply {
 							case ' ':
 								hasMoreLines = false;
 							case '-':
-								messages.add(value.substring(index, newIndex).trim());
+								lines.add(value.substring(index, newIndex).trim());
 								index = newIndex+4;
 								break loop;
 						}
@@ -63,11 +63,11 @@ public class SMTPReply {
 				} else {
 					status = null;
 				}
-				messages.add(message);
+				lines.add(message);
 				break;
 			}
 		}
-		this.messages = messages.toArray(new String[messages.size()]);
+		message = new MultiLineStatusMessage(lines.toArray(new String[lines.size()]));
 	}
 
 	public int getCode() {
@@ -78,7 +78,7 @@ public class SMTPReply {
 		return status;
 	}
 	
-	public String[] getMessages() {
-		return messages;
+	public StatusMessage getMessage() {
+		return message;
 	}
 }
