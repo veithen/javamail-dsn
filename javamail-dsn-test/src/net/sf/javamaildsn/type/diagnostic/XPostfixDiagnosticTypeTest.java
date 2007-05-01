@@ -24,7 +24,7 @@ public class XPostfixDiagnosticTypeTest extends TestCase {
 		assertEquals("10.0.0.1", relayDiagnostic.getMta().getAddress());
 		SMTPReply smtpReply = relayDiagnostic.getSmtpReply();
 		assertEquals(550, smtpReply.getCode());
-		String[] messages = smtpReply.getMessages();
+		String[] messages = smtpReply.getMessage().getLines();
 		assertEquals(1, messages.length);
 		assertEquals("Error: Message content rejected", messages[0]);
 	}
@@ -39,7 +39,7 @@ public class XPostfixDiagnosticTypeTest extends TestCase {
 		XPostfixRelayDiagnostic relayDiagnostic = (XPostfixRelayDiagnostic)diagnostic;
 		SMTPReply smtpReply = relayDiagnostic.getSmtpReply();
 		assertEquals(554, smtpReply.getCode());
-		String[] messages = smtpReply.getMessages();
+		String[] messages = smtpReply.getMessage().getLines();
 		assertEquals(1, messages.length);
 		assertEquals("Message contains NUL characters", messages[0]);
 		assertEquals("end of DATA command", relayDiagnostic.getInReplyTo());
@@ -57,7 +57,7 @@ public class XPostfixDiagnosticTypeTest extends TestCase {
 		XPostfixRelayDiagnostic relayDiagnostic = (XPostfixRelayDiagnostic)diagnostic;
 		SMTPReply smtpReply = relayDiagnostic.getSmtpReply();
 		assertEquals(550, smtpReply.getCode());
-		String[] messages = smtpReply.getMessages();
+		String[] messages = smtpReply.getMessage().getLines();
 		assertEquals(3, messages.length);
 		assertEquals("Mailbox unknown.  Either there is no mailbox associated with this", messages[0]);
 		assertEquals("name or you do not have authorization to see it.", messages[1]);

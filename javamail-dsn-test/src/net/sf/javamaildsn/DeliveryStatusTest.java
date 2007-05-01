@@ -38,7 +38,7 @@ public class DeliveryStatusTest extends TestCase {
 		assertEquals(SMTPDiagnostic.class, diagnostic.getClass());
 		SMTPDiagnostic smtpDiagnostic = (SMTPDiagnostic)diagnostic;
 		assertEquals(550, smtpDiagnostic.getCode());
-		String[] messages = smtpDiagnostic.getMessages();
+		String[] messages = smtpDiagnostic.getMessage().getLines();
 		assertEquals(3, messages.length);
 		assertEquals("Verification failed for <root@tamay-dogan.net>", messages[0]);
 		assertEquals("unrouteable mail domain \"tamay-dogan.net\"", messages[1]);
@@ -61,7 +61,7 @@ public class DeliveryStatusTest extends TestCase {
 		assertEquals(SMTPDiagnostic.class, diagnostic.getClass());
 		SMTPDiagnostic smtpDiagnostic = (SMTPDiagnostic)diagnostic;
 		assertEquals(550, smtpDiagnostic.getCode());
-		String[] messages = smtpDiagnostic.getMessages();
+		String[] messages = smtpDiagnostic.getMessage().getLines();
 		assertEquals(3, messages.length);
 		assertEquals("Mailbox unknown. Either there is no mailbox associated with this", messages[0]);
 		assertEquals("name or you do not have authorization to see it.", messages[1]);
@@ -95,7 +95,7 @@ public class DeliveryStatusTest extends TestCase {
 		XPostfixRelayDiagnostic postfixDiagnostic = (XPostfixRelayDiagnostic)diagnostic;
 		SMTPReply smtpReply = postfixDiagnostic.getSmtpReply();
 		assertEquals(554, smtpReply.getCode());
-		String[] messages = smtpReply.getMessages();
+		String[] messages = smtpReply.getMessage().getLines();
 		assertEquals(1, messages.length);
 		assertEquals("mail server permanently rejected message", messages[0]);
 		assertEquals("end of DATA command", postfixDiagnostic.getInReplyTo());
@@ -117,7 +117,7 @@ public class DeliveryStatusTest extends TestCase {
 		XPostfixRelayDiagnostic postfixDiagnostic = (XPostfixRelayDiagnostic)diagnostic;
 		SMTPReply smtpReply = postfixDiagnostic.getSmtpReply();
 		assertEquals(550, smtpReply.getCode());
-		String[] messages = smtpReply.getMessages();
+		String[] messages = smtpReply.getMessage().getLines();
 		assertEquals(3, messages.length);
 		assertEquals("Mailbox unknown.  Either there is no mailbox associated with this", messages[0]);
 		assertEquals("name or you do not have authorization to see it.", messages[1]);
