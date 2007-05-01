@@ -1,18 +1,20 @@
 package net.sf.javamaildsn;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * @author Andreas Veithen
  */
 public class XPostfixRelayDiagnostic implements XPostfixDiagnostic {
 	private final String host;
 	private final String altHost;
-	private final SMTPDiagnostic smtpDiagnostic;
+	private final SMTPReply smtpReply;
 	private final String inReplyTo;
 	
-	public XPostfixRelayDiagnostic(String host, String altHost, SMTPDiagnostic smtpDiagnostic, String inReplyTo) {
+	public XPostfixRelayDiagnostic(String host, String altHost, SMTPReply smtpReply, String inReplyTo) {
 		this.host = host;
 		this.altHost = altHost;
-		this.smtpDiagnostic = smtpDiagnostic;
+		this.smtpReply = smtpReply;
 		this.inReplyTo = inReplyTo;
 	}
 	
@@ -24,8 +26,8 @@ public class XPostfixRelayDiagnostic implements XPostfixDiagnostic {
 		return altHost;
 	}
 
-	public SMTPDiagnostic getSmtpDiagnostic() {
-		return smtpDiagnostic;
+	public SMTPReply getSmtpReply() {
+		return smtpReply;
 	}
 
 	public String getInReplyTo() {
@@ -45,6 +47,6 @@ public class XPostfixRelayDiagnostic implements XPostfixDiagnostic {
 	}
 
 	public Cause getCause() {
-		return new Cause(null /* TODO */, smtpDiagnostic.getCode(), smtpDiagnostic.getStatus(), smtpDiagnostic.getMessage());
+		return new Cause(null /* TODO */, smtpReply.getCode(), smtpReply.getStatus(), StringUtils.join(smtpReply.getMessages(), "\n"));
 	}
 }
