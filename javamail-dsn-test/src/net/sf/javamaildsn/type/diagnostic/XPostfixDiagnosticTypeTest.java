@@ -16,12 +16,12 @@ public class XPostfixDiagnosticTypeTest extends TestCase {
 	private final XPostfixDiagnosticType type = new XPostfixDiagnosticType();
 	
 	public void testRelayDiagnostic() throws MessagingException {
-		Diagnostic diagnostic = type.parse(null, "host mx.example.com[10.0.0.1] said: 550 Error: Message content rejected");
+		Diagnostic diagnostic = type.parse(null, "host mx.example.com[10.0.0.1] said: 550 Error: Message content rejected", null, null);
 		assertNotNull(diagnostic);
 		assertEquals(XPostfixRelayDiagnostic.class, diagnostic.getClass());
 		XPostfixRelayDiagnostic relayDiagnostic = (XPostfixRelayDiagnostic)diagnostic;
-		assertEquals("mx.example.com", relayDiagnostic.getHost());
-		assertEquals("10.0.0.1", relayDiagnostic.getAltHost());
+		assertEquals("mx.example.com", relayDiagnostic.getMta().getName());
+		assertEquals("10.0.0.1", relayDiagnostic.getMta().getAddress());
 		SMTPReply smtpReply = relayDiagnostic.getSmtpReply();
 		assertEquals(550, smtpReply.getCode());
 		String[] messages = smtpReply.getMessages();
@@ -33,7 +33,7 @@ public class XPostfixDiagnosticTypeTest extends TestCase {
 		Diagnostic diagnostic = type.parse(null, MimeUtility.unfold(
 			"host /var/imap/socket/lmtp[/var/imap/socket/lmtp]\n" +
 			"\tsaid: 554 5.6.0 Message contains NUL characters (in reply to end of DATA\n" +
-			"\tcommand)"));
+			"\tcommand)"), null, null);
 		assertNotNull(diagnostic);
 		assertEquals(XPostfixRelayDiagnostic.class, diagnostic.getClass());
 		XPostfixRelayDiagnostic relayDiagnostic = (XPostfixRelayDiagnostic)diagnostic;
@@ -51,7 +51,7 @@ public class XPostfixDiagnosticTypeTest extends TestCase {
 			"host 127.0.0.1[127.0.0.1] said: 550-Mailbox\n" +
 			"\tunknown.  Either there is no mailbox associated with this 550-name or you\n" +
 			"\tdo not have authorization to see it. 550 5.1.1 User unknown (in reply to\n" +
-			"\tRCPT TO command)"));
+			"\tRCPT TO command)"), null, null);
 		assertNotNull(diagnostic);
 		assertEquals(XPostfixRelayDiagnostic.class, diagnostic.getClass());
 		XPostfixRelayDiagnostic relayDiagnostic = (XPostfixRelayDiagnostic)diagnostic;
