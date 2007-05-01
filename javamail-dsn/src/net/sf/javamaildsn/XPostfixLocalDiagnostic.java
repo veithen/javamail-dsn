@@ -5,10 +5,12 @@ package net.sf.javamaildsn;
  */
 public class XPostfixLocalDiagnostic implements XPostfixDiagnostic {
 	private final MtaName mta;
+	private final MailSystemStatus status;
 	private final StatusMessage message;
 	
-	public XPostfixLocalDiagnostic(MtaName mta, String message) {
+	public XPostfixLocalDiagnostic(MtaName mta, MailSystemStatus status, String message) {
 		this.mta = mta;
+		this.status = status;
 		this.message = new SingleLineStatusMessage(message);
 	}
 	
@@ -21,7 +23,7 @@ public class XPostfixLocalDiagnostic implements XPostfixDiagnostic {
 	}
 	
 	public MailSystemStatus getStatus() {
-		return null;
+		return status;
 	}
 
 	public StatusMessage getMessage() {

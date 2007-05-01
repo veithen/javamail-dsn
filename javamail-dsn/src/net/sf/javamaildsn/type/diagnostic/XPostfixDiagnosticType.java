@@ -24,7 +24,8 @@ public class XPostfixDiagnosticType implements FieldType<XPostfixDiagnostic> {
 		if (matcher.matches()) {
 			return new XPostfixRelayDiagnostic(new PostfixMtaName(matcher.group(1), matcher.group(2)), new SMTPReply(matcher.group(3)), matcher.group(5));
 		} else {
-			return new XPostfixLocalDiagnostic(ds.getReportingMta(), value);
+			// We trust Postfix, so we take the status code from the DSN
+			return new XPostfixLocalDiagnostic(ds.getReportingMta(), rds.getStatus(), value);
 		}
 	}
 }
