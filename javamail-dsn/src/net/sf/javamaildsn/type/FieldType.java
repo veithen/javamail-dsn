@@ -2,6 +2,9 @@ package net.sf.javamaildsn.type;
 
 import javax.mail.MessagingException;
 
+import net.sf.javamaildsn.DeliveryStatus;
+import net.sf.javamaildsn.PerRecipientDeliveryStatus;
+
 /**
  * @author Andreas Veithen
  */
@@ -13,9 +16,10 @@ public interface FieldType<T> {
 	 * 
 	 * @param type TODO
 	 * @param value
-	 * 
+	 * @param ds TODO
+	 * @param rds TODO
 	 * @return
 	 * @throws MessagingException TODO
 	 */
-	T parse(String type, String value) throws MessagingException;
+	T parse(String type, String value, DeliveryStatus ds, PerRecipientDeliveryStatus rds) throws MessagingException;
 }

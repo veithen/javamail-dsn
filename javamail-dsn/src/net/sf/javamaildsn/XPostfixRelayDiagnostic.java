@@ -1,29 +1,25 @@
 package net.sf.javamaildsn;
 
+import net.sf.javamaildsn.type.diagnostic.PostfixMtaName;
+
 import org.apache.commons.lang.StringUtils;
 
 /**
  * @author Andreas Veithen
  */
 public class XPostfixRelayDiagnostic implements XPostfixDiagnostic {
-	private final String host;
-	private final String altHost;
+	private final PostfixMtaName mta;
 	private final SMTPReply smtpReply;
 	private final String inReplyTo;
 	
-	public XPostfixRelayDiagnostic(String host, String altHost, SMTPReply smtpReply, String inReplyTo) {
-		this.host = host;
-		this.altHost = altHost;
+	public XPostfixRelayDiagnostic(PostfixMtaName mta, SMTPReply smtpReply, String inReplyTo) {
+		this.mta = mta;
 		this.smtpReply = smtpReply;
 		this.inReplyTo = inReplyTo;
 	}
 	
-	public String getHost() {
-		return host;
-	}
-
-	public String getAltHost() {
-		return altHost;
+	public PostfixMtaName getMta() {
+		return mta;
 	}
 
 	public SMTPReply getSmtpReply() {
@@ -35,18 +31,14 @@ public class XPostfixRelayDiagnostic implements XPostfixDiagnostic {
 	}
 	
 	public int getCode() {
-		return -1;
+		return smtpReply.getCode();
 	}
 	
 	public MailSystemStatus getStatus() {
-		return null;
+		return smtpReply.getStatus();
 	}
 	
 	public String getMessage() {
-		return null;
-	}
-
-	public Cause getCause() {
-		return new Cause(null /* TODO */, smtpReply.getCode(), smtpReply.getStatus(), StringUtils.join(smtpReply.getMessages(), "\n"));
+		return StringUtils.join(smtpReply.getMessages(), "\n");
 	}
 }

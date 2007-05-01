@@ -88,35 +88,13 @@ public class PerRecipientDeliveryStatus {
 		if (value == null) {
 			return null;
 		} else {
-			return HeaderUtils.parseDiagnostic(value);
+			return HeaderUtils.parseDiagnostic(value, deliveryStatus, this);
 		}
 	}
 	
 	public MtaName getRemoteMta() throws MessagingException {
 		String value = HeaderUtils.getOptionalUniqueHeader(headers, "Remote-MTA");
-		return value == null ? null : HeaderUtils.parseMtaName(value);
-	}
-	
-	public Cause getCause() throws MessagingException {
-		Diagnostic diagnostic = getDiagnostic();
-		Cause cause = diagnostic == null ? null : diagnostic.getCause();
-		if (cause != null) {
-			return cause;
-		} else {
-			MtaName mta;
-			MailSystemStatus status;
-			MtaName remoteMta = getRemoteMta();
-			if (remoteMta != null) {
-				mta = remoteMta;
-				// Only report the status from the diagnostic; if the delivery failure is cause by a
-				// remote MTA, the status reported in the Status header is not reliable.
-				status = diagnostic.getStatus();
-			} else {
-				mta = deliveryStatus.getReportingMta();
-				status = getStatus();
-			}
-			return new Cause(mta, diagnostic == null ? -1 : diagnostic.getCode(), status, diagnostic == null ? null : diagnostic.getMessage());
-		}
+		return value == null ? null : HeaderUtils.parseMtaName(value, deliveryStatus, this);
 	}
 	
 	private Address finalRecipient;
@@ -125,10 +103,10 @@ public class PerRecipientDeliveryStatus {
 	public PerRecipientDeliveryStatus(DeliveryStatus deliveryStatus, InputStream is) throws MessagingException {
 		this.deliveryStatus = deliveryStatus;
 		headers = new InternetHeaders(is);
-		finalRecipient = HeaderUtils.parseAddress(HeaderUtils.getRequiredUniqueHeader(headers, "Final-Recipient"));
+		finalRecipient = HeaderUtils.parseAddress(HeaderUtils.getRequiredUniqueHeader(headers, "Final-Recipient"), deliveryStatus, this);
 		{
 			String s = HeaderUtils.getOptionalUniqueHeader(headers, "Original-Recipient");
-			originalRecipient = s == null ? null : HeaderUtils.parseAddress(s);
+			originalRecipient = s == null ? null : HeaderUtils.parseAddress(s, deliveryStatus, this);
 		}
 	}
 	

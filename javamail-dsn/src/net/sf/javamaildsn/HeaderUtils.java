@@ -85,8 +85,8 @@ public class HeaderUtils {
 	 * @throws ParseException if the format of the value is incorrect
 	 * @throws MessagingException if the MTA name type is not "dns"
 	 */
-	public static MtaName parseMtaName(String value) throws MessagingException {
-		return mtaNameParser.parse(value);
+	public static MtaName parseMtaName(String value, DeliveryStatus ds, PerRecipientDeliveryStatus rds) throws MessagingException {
+		return mtaNameParser.parse(value, ds, rds);
 	}
 	
 	/**
@@ -101,13 +101,13 @@ public class HeaderUtils {
 	 * @throws ParseException if the format of the value is incorrect
 	 * @throws MessagingException if the address type is unrecognized
 	 */
-	public static Address parseAddress(String value) throws MessagingException {
-		return addressParser.parse(value);
+	public static Address parseAddress(String value, DeliveryStatus ds, PerRecipientDeliveryStatus rds) throws MessagingException {
+		return addressParser.parse(value, ds, rds);
 	}
 	
 	// TODO: this is probably used only once; so move this
-	public static Diagnostic parseDiagnostic(String value) throws MessagingException {
-		return diagnosticParser.parse(value);
+	public static Diagnostic parseDiagnostic(String value, DeliveryStatus ds, PerRecipientDeliveryStatus rds) throws MessagingException {
+		return diagnosticParser.parse(value, ds, rds);
 	}
 	
 	private final static Pattern commentPattern = Pattern.compile("(.*)\\s\\(.*\\)");

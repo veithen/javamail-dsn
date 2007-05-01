@@ -63,7 +63,7 @@ public class DeliveryStatus {
 	 */
 	public MtaName getReportingMta() throws MessagingException {
 		if (cachedReportingMta == null) {
-			cachedReportingMta = HeaderUtils.parseMtaName(HeaderUtils.getRequiredUniqueHeader(headers, "Reporting-MTA"));
+			cachedReportingMta = HeaderUtils.parseMtaName(HeaderUtils.getRequiredUniqueHeader(headers, "Reporting-MTA"), this, null);
 		}
 		return cachedReportingMta;
 	}
@@ -80,7 +80,7 @@ public class DeliveryStatus {
 	 * @throws MessagingException if the name of the translating gateway could not be extracted
 	 */
     public MtaName getDsnGateway() throws MessagingException {
-		return HeaderUtils.parseMtaName(HeaderUtils.getRequiredUniqueHeader(headers, "DSN-Gateway"));
+		return HeaderUtils.parseMtaName(HeaderUtils.getRequiredUniqueHeader(headers, "DSN-Gateway"), this, null);
 	}
     
     /**
@@ -95,7 +95,7 @@ public class DeliveryStatus {
 	public MtaName getReceivedFromMta() {
 		try {
 			String value = HeaderUtils.getOptionalUniqueHeader(headers, "Received-From-MTA");
-			return value == null ? null : HeaderUtils.parseMtaName(value);
+			return value == null ? null : HeaderUtils.parseMtaName(value, this, null);
 		}
 		catch (MessagingException ex) {
 			return null;

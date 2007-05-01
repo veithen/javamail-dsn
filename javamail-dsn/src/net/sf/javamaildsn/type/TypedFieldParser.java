@@ -6,6 +6,9 @@ import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeUtility;
 
+import net.sf.javamaildsn.DeliveryStatus;
+import net.sf.javamaildsn.PerRecipientDeliveryStatus;
+
 /**
  * @author Andreas Veithen
  */
@@ -25,7 +28,7 @@ public class TypedFieldParser<T> {
 		this.defaultType = defaultType;
 	}
 	
-	public T parse(String value) throws MessagingException {
+	public T parse(String value, DeliveryStatus ds, PerRecipientDeliveryStatus rds) throws MessagingException {
 		int index = value.indexOf(';');
 		if (index == -1) {
 			throw new MessagingException("Invalid format for typed field");
@@ -35,7 +38,7 @@ public class TypedFieldParser<T> {
 			if (type == null) {
 				type = defaultType;
 			}
-			return type.parse(identifier, MimeUtility.unfold(value.substring(index+1).trim()));
+			return type.parse(identifier, MimeUtility.unfold(value.substring(index+1).trim()), ds, rds);
 		}
 	}
 }

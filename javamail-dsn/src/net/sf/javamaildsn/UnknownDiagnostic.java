@@ -12,6 +12,10 @@ public class UnknownDiagnostic implements Diagnostic {
 		this.value = MimeUtility.unfold(value);
 	}
 	
+	public MtaName getMta() {
+		return null; // TODO
+	}
+	
 	public int getCode() {
 		return -1;
 	}
@@ -22,9 +26,5 @@ public class UnknownDiagnostic implements Diagnostic {
 	
 	public String getMessage() {
 		return value;
-	}
-	
-	public Cause getCause() {
-		return null;
 	}
 }

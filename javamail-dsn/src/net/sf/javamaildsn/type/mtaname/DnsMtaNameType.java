@@ -7,7 +7,9 @@ import java.util.regex.Pattern;
 
 import javax.mail.MessagingException;
 
+import net.sf.javamaildsn.DeliveryStatus;
 import net.sf.javamaildsn.DnsMtaName;
+import net.sf.javamaildsn.PerRecipientDeliveryStatus;
 import net.sf.javamaildsn.type.FieldType;
 
 /**
@@ -38,7 +40,7 @@ public class DnsMtaNameType implements FieldType<DnsMtaName> {
 	private final static Pattern valuePattern = Pattern.compile("(?:(" + domainNamePattern + ")|(?:" + domainLiteralPattern + "))(?:\\s\\((.*)\\))?");
 	private final static Pattern altValuePattern = Pattern.compile("(" + domainNamePattern + ")\\s(?:" + domainLiteralPattern + ")");
 	
-	public DnsMtaName parse(String type, String value) throws MessagingException {
+	public DnsMtaName parse(String type, String value, DeliveryStatus ds, PerRecipientDeliveryStatus rds) throws MessagingException {
 		String domainName;
 		String address;
 		Matcher matcher = valuePattern.matcher(value);

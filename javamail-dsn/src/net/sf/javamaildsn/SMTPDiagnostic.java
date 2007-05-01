@@ -12,18 +12,22 @@ import org.apache.commons.lang.StringUtils;
  * @author Andreas Veithen
  */
 public class SMTPDiagnostic implements Diagnostic {
-	private final int code;
+	private final MtaName mta;
 	private final MailSystemStatus status;
-	private final String[] messages;
+	private final SMTPReply reply;
 	
-	public SMTPDiagnostic(int code, MailSystemStatus status, String[] messages) {
-		this.code = code;
+	public SMTPDiagnostic(MtaName mta, MailSystemStatus status, SMTPReply reply) {
+		this.mta = mta;
 		this.status = status;
-		this.messages = messages;
+		this.reply = reply;
+	}
+	
+	public MtaName getMta() {
+		return mta;
 	}
 
 	public int getCode() {
-		return code;
+		return reply.getCode();
 	}
 
 	public MailSystemStatus getStatus() {
@@ -31,14 +35,10 @@ public class SMTPDiagnostic implements Diagnostic {
 	}
 	
 	public String[] getMessages() {
-		return messages.clone();
+		return reply.getMessages();
 	}
 	
 	public String getMessage() {
-		return StringUtils.join(messages, "\n");
-	}
-	
-	public Cause getCause() {
-		return null;
+		return StringUtils.join(reply.getMessages(), "\n");
 	}
 }
