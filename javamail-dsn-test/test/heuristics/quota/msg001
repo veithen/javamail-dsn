@@ -1,0 +1,13 @@
+Reporting-MTA: dns; vme-ext.prodigy.net
+Received-From-MTA: DNS; [206.222.31.7]
+Arrival-Date: Fri, 21 Nov 2003 18:43:44 -0500
+
+Final-Recipient: RFC822; xxxxxxxxxx@sbcglobal.net
+Action: failed
+Status: 5.0.0
+Remote-MTA: DNS; mx1.sbc.mail.yahoo.com
+Diagnostic-Code: SMTP; 554 delivery error: dd Sorry, your message to 
+	xxxxxxxxxx@sbcglobal.net cannot be delivered.  This account is over quota. - 
+	mta813.mail.yahoo.com
+Last-Attempt-Date: Fri, 21 Nov 2003 18:44:06 -0500
+

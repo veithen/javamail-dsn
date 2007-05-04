@@ -1,0 +1,10 @@
+Reporting-MTA: dns; rly-xl03.mx.aol.com
+Arrival-Date: Wed, 20 Aug 2003 16:43:59 -0400 (EDT)
+
+Final-Recipient: RFC822; xxxxxxxxx@aol.com
+Action: failed
+Status: 5.0.0
+Remote-MTA: DNS; air-xl01.mail.aol.com
+Diagnostic-Code: SMTP; 554 TRANSACTION FAILED - Unrepairable Virus Detected. Your mail has not been sent.
+Last-Attempt-Date: Wed, 20 Aug 2003 16:45:04 -0400 (EDT)
+

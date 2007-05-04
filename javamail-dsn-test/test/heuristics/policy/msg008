@@ -1,0 +1,9 @@
+Reporting-MTA: dns; hermes.chez-thomas.org
+Arrival-Date: Thu,  2 Oct 2003 12:38:45 -0600 (MDT)
+
+Final-Recipient: rfc822; ecos-patches@ecos.sourceware.org
+Action: failed
+Status: 5.0.0
+Diagnostic-Code: X-Postfix; host sources.redhat.com[67.72.78.213] said: 553
+    sorry, that domain isn't in my list of allowed rcpthosts (#5.7.1)
+

@@ -1,0 +1,12 @@
+Reporting-MTA: dns; outfbmx012.isp.belgacom.be
+X-Postfix-Queue-ID: DAC137C49C
+X-Postfix-Sender: rfc822; andreas.veithen@skynet.be
+Arrival-Date: Fri, 27 Apr 2007 00:07:11 +0200 (CEST)
+
+Final-Recipient: rfc822; test@sdfsdfhfsdj.com
+Original-Recipient: rfc822;test@sdfsdfhfsdj.com
+Action: failed
+Status: 5.4.4
+Diagnostic-Code: X-Postfix; Host or domain name not found. Name service error
+    for name=sdfsdfhfsdj.com type=A: Host not found
+

@@ -1,0 +1,9 @@
+Reporting-MTA: dns; smtp.nsoft.it
+Arrival-Date: Tue, 23 Jul 2002 16:45:04 +0200 (CEST)
+
+Final-Recipient: rfc822; isi@windows.it
+Action: failed
+Status: 5.0.0
+Diagnostic-Code: X-Postfix; host relay.nsoft.it[62.100.65.11] said: 550
+    Unacceptable content
+

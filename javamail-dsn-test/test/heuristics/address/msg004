@@ -1,0 +1,8 @@
+Reporting-MTA: dns; oink.irc.org
+Arrival-Date: Tue,  1 Aug 2006 20:54:23 -0400 (EDT)
+
+Final-Recipient: rfc822; irc@irc.org
+Action: failed
+Status: 5.0.0
+Diagnostic-Code: X-Postfix; unknown user: "irc"
+

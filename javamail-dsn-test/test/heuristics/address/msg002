@@ -1,0 +1,11 @@
+Reporting-MTA: dns; server18.th.com.br
+Received-From-MTA: DNS; 200-158-186-82.dsl.telesp.net.br
+Arrival-Date: Sat, 7 Apr 2007 15:46:49 GMT
+
+Final-Recipient: RFC822; xyz@crcsc.org.br
+Action: failed
+Status: 5.3.0
+Remote-MTA: DNS; rot.crcsc.org.br
+Diagnostic-Code: SMTP; 553 5.3.0 <xyz@crcsc.org.br>... usuario desconhecido
+Last-Attempt-Date: Sat, 7 Apr 2007 15:46:51 GMT
+

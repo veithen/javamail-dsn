@@ -1,0 +1,13 @@
+Reporting-MTA: dns; smtp.us.messagingengine.com
+Arrival-Date: Wed,  2 Jul 2003 14:31:09 -0400 (EDT)
+
+Final-Recipient: rfc822; fastem.com@fastem.com
+Action: failed
+Status: 5.0.0
+Diagnostic-Code: X-Postfix; host localhost[127.0.0.1] said: 552 Virus rejected
+    by Kaspersky: Please get clean your PC using http://www.kaspersky.com
+    before resending: DETAILS: From
+    <informe-migracion@listas.hispalinux.es>][Date Wed, 2 Jul 2003 14:30:31
+    --0400]/your_details.zip/details.pif  Infected by virus: I-Worm.Sobig.e (in
+    reply to end of DATA command)
+

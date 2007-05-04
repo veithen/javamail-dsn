@@ -1,0 +1,12 @@
+Reporting-MTA: dns; leimasin.iki.fi
+Received-From-MTA: DNS; ainavaan.iki.fi
+Arrival-Date: Wed, 21 Mar 2007 08:53:47 +0200 (EET)
+
+Final-Recipient: RFC822; xxx@asetus1.silppuri.iki.fi
+X-Actual-Recipient: RFC822; xxxxxx@gmail.com
+Action: failed
+Status: 5.7.0
+Remote-MTA: DNS; gmail-smtp-in.l.google.com
+Diagnostic-Code: SMTP; 552 5.7.0 Illegal Attachment q40si1504576ugc
+Last-Attempt-Date: Wed, 21 Mar 2007 08:53:49 +0200 (EET)
+

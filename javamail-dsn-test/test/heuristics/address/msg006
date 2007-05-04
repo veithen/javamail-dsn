@@ -1,0 +1,13 @@
+Reporting-MTA: dns; mailfilter.sfcn.org
+X-Postfix-Queue-ID: 896BB1E413C
+X-Postfix-Sender: rfc822; project@gna.org
+Arrival-Date: Wed, 14 Jun 2006 00:43:01 -0600 (MDT)
+
+Final-Recipient: rfc822; xxxxxxxxxxxxxxxxx@sfcn.org
+Action: failed
+Status: 5.0.0
+Diagnostic-Code: X-Postfix; host 127.0.0.1[127.0.0.1] said: 550 5.1.0 Failed,
+        id=01832-01,
+        from MTA([160.7.240.7]:): 550 Mailbox not found (in reply to
+        end of DATA command)
+

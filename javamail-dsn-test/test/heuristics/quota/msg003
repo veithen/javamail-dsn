@@ -1,0 +1,10 @@
+Reporting-MTA: dns;ext-imc-01.partners.extranet.microsoft.com
+Received-From-MTA: dns;ext-imc-01.partners.extranet.microsoft.com
+Arrival-Date: Thu, 8 Dec 2005 05:07:11 -0800
+Content-Type: text/plain
+
+Final-Recipient: rfc822;abuse@css.one.microsoft.com
+Action: failed
+Status: 4.2.2
+Diagnostic-Code: smtp;452 4.2.2 Mailbox full
+

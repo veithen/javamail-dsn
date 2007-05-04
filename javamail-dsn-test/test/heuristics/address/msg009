@@ -1,0 +1,10 @@
+Reporting-MTA: dns; slimek.man.lublin.pl
+Arrival-Date: Fri, 8 Feb 2002 18:19:57 +0100
+
+Original-Recipient: rfc822;xxxxxx@neptun
+Final-Recipient: RFC822;xxxxxx@neptun
+Action: failed
+Status: 5.4.4 (DNS lookup report)
+Diagnostic-Code: smtp; 500 (DNS: no such domain: neptun)
+Last-Attempt-Date: Fri, 8 Feb 2002 18:20:16 +0100
+

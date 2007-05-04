@@ -1,0 +1,10 @@
+Reporting-MTA: dns; algy.cmnh.org
+Received-From-MTA: DNS; localhost
+Arrival-Date: Tue, 26 Aug 2003 17:02:14 -0400 (EDT)
+
+Final-Recipient: RFC822; xxxxxxxx@www.cmnh.org
+Action: failed
+Status: 5.7.1
+Diagnostic-Code: SMTP; 550 5.7.1 Mail from 10.1.12.124 refused by blackhole site relays.osirusoft.com
+Last-Attempt-Date: Tue, 26 Aug 2003 17:04:08 -0400 (EDT)
+

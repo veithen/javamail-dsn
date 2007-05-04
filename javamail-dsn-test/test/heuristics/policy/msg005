@@ -1,0 +1,11 @@
+Reporting-MTA: dns; balder.inter.net.il
+Arrival-Date: Mon, 1 Nov 2004 16:25:23 +0200 (IST)
+X-Message-Diagnostic-Code: smtp; 552 we don't accept email with executable content (#5.3.4)
+
+Final-Recipient: RFC822; cygwin-xfree@cygwin.com
+Action: failed
+Status: 5.2.2
+Remote-MTA: DNS; sourceware.org
+Diagnostic-Code: SMTP; 552 we don't accept email with executable content (#5.3.4)
+Last-Attempt-Date: Mon, 1 Nov 2004 16:25:28 +0200 (IST)
+

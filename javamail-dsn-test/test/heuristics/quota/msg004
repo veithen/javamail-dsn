@@ -1,0 +1,9 @@
+Reporting-MTA: dns; hotbrev.com
+Arrival-Date: Thu, 11 Mar 2004 02:36:29 +0100 (CET)
+
+Final-Recipient: rfc822; xxxxxxxxx@hotbrev.com
+Action: failed
+Status: 4.0.0
+Diagnostic-Code: X-Postfix; maildir delivery failed: "Maildir size exceeded
+    (OverQuota)"
+

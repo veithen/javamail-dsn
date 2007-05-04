@@ -1,0 +1,10 @@
+Reporting-MTA: dns; rly-xb06.mx.aol.com
+Arrival-Date: Fri, 22 Aug 2003 15:18:35 -0400 (EDT)
+
+Final-Recipient: RFC822; xxxx@aol.com
+Action: failed
+Status: 5.1.1
+Remote-MTA: DNS; air-xb03.mail.aol.com
+Diagnostic-Code: SMTP; 550 xxxx IS NOT ACCEPTING MAIL FROM THIS SENDER
+Last-Attempt-Date: Fri, 22 Aug 2003 15:18:50 -0400 (EDT)
+

@@ -1,0 +1,11 @@
+Reporting-MTA: dns; smtpzilla1.xs4all.nl
+Received-From-MTA: DNS; 213-84-108-136.adsl.xs4all.nl
+Arrival-Date: Tue, 20 Jan 2004 20:29:47 +0100 (CET)
+
+Final-Recipient: RFC822; xxxxx@irk.ru
+Action: failed
+Status: 5.3.0
+Remote-MTA: DNS; relay1.dsi.ru
+Diagnostic-Code: SMTP; 553 5.3.0 <xxxxx@irk.ru>... blocked spam from 194.109.127.137 contact abuse@dsi.ru
+Last-Attempt-Date: Tue, 20 Jan 2004 20:31:51 +0100 (CET)
+

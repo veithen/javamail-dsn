@@ -1,0 +1,10 @@
+Reporting-MTA: dns; mcs.anl.gov
+Arrival-Date: Tue, 22 Jul 2003 16:40:57 -0500
+
+Final-Recipient: rfc822; xxxxxxxxxxxxxxxxxxxx@mcs.anl.gov
+X-Actual-Recipient: RFC822; xxxxxx@cs.uchicago.edu
+Action: failed
+Status: 5.3.4
+Diagnostic-Code: SMTP; 552 Message size exceeds fixed limit
+Last-Attempt-Date: Tue, 22 Jul 2003 16:43:24 -0500
+

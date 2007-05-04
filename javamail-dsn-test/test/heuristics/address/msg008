@@ -1,0 +1,8 @@
+Reporting-MTA: dns;seoul.adelior.local
+
+Final-Recipient: rfc822;xxxxxxxxxxx@adelior.be
+Action: failed
+Status: 5.1.1
+Diagnostic-Code: X-Notes; User xxxxxxxxxxx (xxxxxxxxxxx@ADELIOR) not 
+ listed in Domino Directory
+

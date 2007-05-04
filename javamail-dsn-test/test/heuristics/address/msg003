@@ -1,0 +1,10 @@
+Reporting-MTA: dns; chez.maem.org
+Arrival-Date: Tue, 16 Nov 2004 22:24:37 +0900 (JST)
+
+Final-Recipient: rfc822; xyz@lists.apnic.net
+Action: failed
+Status: 5.0.0
+Diagnostic-Code: X-Postfix; host cumin.apnic.net[202.12.29.59] said: 553 5.3.0
+	<xyz@lists.apnic.net>... User unknown (in reply to
+	RCPT TO command)
+

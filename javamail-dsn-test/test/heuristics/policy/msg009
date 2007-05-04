@@ -1,0 +1,10 @@
+Reporting-MTA: dns; server2.rz.uni-leipzig.de
+Arrival-Date: Thu,  3 Jul 2003 17:18:03 +0200 (METDST)
+
+Final-Recipient: rfc822; xxxxx@math.uni-leipzig.de
+Action: failed
+Status: 5.0.0
+Diagnostic-Code: X-Postfix; host miserv1.mathematik.uni-leipzig.de[139.18.10.1]
+    said: 550 This message contains a virus or other harmful content
+    (Worm.Sobig.E). (in reply to end of DATA command)
+

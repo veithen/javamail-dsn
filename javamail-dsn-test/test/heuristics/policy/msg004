@@ -1,0 +1,10 @@
+Reporting-MTA: dns; mail.iiit.net
+Arrival-Date: Thu, 12 Jul 2001 18:25:00 +0530
+
+Final-Recipient: RFC822; xxxx@vsnl.com
+Action: failed
+Status: 5.0.0
+Remote-MTA: DNS; mailmx.vsnl.com
+Diagnostic-Code: SMTP; 554 Service unavailable; [196.12.44.3] blocked using relays.mail-abuse.org
+Last-Attempt-Date: Thu, 12 Jul 2001 18:33:15 +0530
+

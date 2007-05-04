@@ -1,0 +1,10 @@
+Reporting-MTA: dns; mas24.bezeqint.net
+Arrival-Date: Tue, 20 Feb 2007 23:49:29 +0200 (IST)
+
+Final-Recipient: RFC822; <xxxxxx@bezeqint.net>
+Action: failed
+Status: 5.2.2
+Remote-MTA: X-Unix; mirapoint
+Diagnostic-Code: smtp; 552 5.2.2 Over quota
+Last-Attempt-Date: Tue, 20 Feb 2007 23:49:30 +0200 (IST)
+

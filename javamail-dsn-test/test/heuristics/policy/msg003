@@ -1,0 +1,11 @@
+Reporting-MTA: dns; rocket2.sotec.co.jp
+Received-From-MTA: DNS; YahooBB218136010018.bbtec.net
+Arrival-Date: Tue, 11 Jan 2005 04:48:09 +0900
+
+Final-Recipient: RFC822; support@sotec.co.jp
+Action: failed
+Status: 5.0.0
+Remote-MTA: DNS; [10.0.1.6]
+Diagnostic-Code: SMTP; 554 Message rejected for policy reasons.
+Last-Attempt-Date: Tue, 11 Jan 2005 04:48:11 +0900
+

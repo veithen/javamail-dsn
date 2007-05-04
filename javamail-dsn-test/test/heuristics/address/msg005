@@ -1,0 +1,10 @@
+Reporting-MTA: dns; fastmail.fm
+Arrival-Date: Mon, 18 Sep 2006  5:36 PM
+
+Final-Recipient: rfc822; abcdefghijk@fastmail.fm
+Action: failed
+Status: 5.0.0
+Diagnostic-Code: X-Postfix;
+        <abcdefghijk@fastmail.fm>: Recipient address rejected: User
+        unknown in local recipient table
+
