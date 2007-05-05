@@ -149,4 +149,16 @@ public class DeliveryStatus {
 		}
 		return result;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder buffer = new StringBuilder();
+		buffer.append(HeaderUtils.dumpHeaders(headers));
+		buffer.append('\n');
+		for (PerRecipientDeliveryStatus rds : recip.values()) {
+			buffer.append(rds);
+			buffer.append('\n');
+		}
+		return buffer.toString();
+	}
 }

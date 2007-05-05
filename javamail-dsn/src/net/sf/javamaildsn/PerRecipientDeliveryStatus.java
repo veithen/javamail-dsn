@@ -1,6 +1,8 @@
 package net.sf.javamaildsn;
 
 import java.io.InputStream;
+import java.util.Enumeration;
+
 import javax.mail.Address;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetHeaders;
@@ -97,6 +99,11 @@ public class PerRecipientDeliveryStatus {
 		return value == null ? null : HeaderUtils.parseMtaName(value, deliveryStatus, this);
 	}
 	
+	@Override
+	public String toString() {
+		return HeaderUtils.dumpHeaders(headers);
+	}
+
 	private Address finalRecipient;
 	private Address originalRecipient;
 	

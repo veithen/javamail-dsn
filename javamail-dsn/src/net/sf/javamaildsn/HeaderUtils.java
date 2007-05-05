@@ -1,5 +1,6 @@
 package net.sf.javamaildsn;
 
+import java.util.Enumeration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -115,5 +116,15 @@ public class HeaderUtils {
 	public static String stripComment(String value) {
 		Matcher matcher = commentPattern.matcher(value);
 		return matcher.matches() ? matcher.group(1) : value;
+	}
+	
+	public static String dumpHeaders(InternetHeaders headers) {
+		StringBuilder buffer = new StringBuilder();
+		Enumeration e = headers.getAllHeaderLines();
+		while (e.hasMoreElements()) {
+			buffer.append((String)e.nextElement());
+			buffer.append('\n');
+		}
+		return buffer.toString();
 	}
 }
