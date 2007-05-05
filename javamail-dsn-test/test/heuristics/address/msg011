@@ -1,0 +1,10 @@
+Reporting-MTA: dns; outmx026.isp.belgacom.be
+Arrival-Date: Wed, 2 Nov 2005 00:15:09 +0100
+
+Final-Recipient: RFC822; ezejrdgzetre@hotmail.com
+Action: failed
+Status: 5.1.1
+Remote-MTA: DNS; mx3.hotmail.com
+Diagnostic-Code: SMTP; 550 Requested action not taken: mailbox unavailable
+Last-Attempt-Date: Wed, 2 Nov 2005 00:15:14 +0100
+

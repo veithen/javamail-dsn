@@ -1,0 +1,15 @@
+Reporting-MTA: dns; gate.veithen.net
+X-Postfix-Queue-ID: 1D4485449D
+X-Postfix-Sender: rfc822; andreas.veithen@skynet.be
+Arrival-Date: Tue,  1 Nov 2005 23:55:27 +0100 (CET)
+
+Final-Recipient: rfc822; test2@gate.veithen.net
+Original-Recipient: rfc822; test@gate.veithen.net
+Action: failed
+Status: 5.0.0
+Diagnostic-Code: X-Postfix; host
+    /var/run/cyrus/socket/lmtp[/var/run/cyrus/socket/lmtp] said: 550-Mailbox
+    unknown.  Either there is no mailbox associated with this 550-name or you
+    do not have authorization to see it. 550 5.1.1 User unknown (in reply to
+    RCPT TO command)
+

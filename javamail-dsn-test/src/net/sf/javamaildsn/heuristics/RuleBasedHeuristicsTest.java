@@ -19,7 +19,7 @@ public class RuleBasedHeuristicsTest extends TestCase {
 				InputStream is = file.getContent().getInputStream();
 				DeliveryStatus ds = new DeliveryStatus(is);
 				is.close();
-				assertEquals(reason, heuristics.getReason(ds.getPerRecipientParts()[0].getDiagnostic()));
+				assertEquals("Reason for " + file, reason, heuristics.getReason(ds.getPerRecipientParts()[0].getDiagnostic()));
 			}
 		}
 	}
