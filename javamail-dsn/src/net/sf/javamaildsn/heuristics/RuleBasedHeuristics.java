@@ -18,6 +18,7 @@ public class RuleBasedHeuristics implements Heuristics {
 			RuleBasedHeuristicsFactory factory = new RuleBasedHeuristicsFactory();
 			BoundaryMatcher boundaryMatcher = new BoundaryMatcher(new char[] { ' ', '.', ':', '(', ')', '"' });
 			factory.addRuleParser("keywords", new KeywordRuleParser(boundaryMatcher));
+			factory.addRuleParser("pattern", new PatternRuleParser(boundaryMatcher));
 			factory.addRuleParser("status", new StatusRuleParser());
 			defaultInstance = factory.create("net.sf.javamaildsn.heuristics.def");
 		}
@@ -34,11 +35,15 @@ public class RuleBasedHeuristics implements Heuristics {
 		ruleList.add(rule);
 	}
 	
+	public static String normalizeMessage(String message) {
+		return message.replaceAll("\\s+", " ").toLowerCase();
+	}
+	
 	public Reason getReason(Diagnostic diagnostic) {
 		Reason reason = null;
 		int code = diagnostic.getCode();
 		MailSystemStatus status = diagnostic.getStatus();
-		String message = diagnostic.getMessage().getUnfolded().replaceAll("\\s+", " ").toUpperCase();
+		String message = normalizeMessage(diagnostic.getMessage().getUnfolded());
 		for (Map.Entry<Reason,List<Rule>> entry : ruleSets.entrySet()) {
 			Reason heuristicReason = entry.getKey();
 			for (Rule rule : entry.getValue()) {
