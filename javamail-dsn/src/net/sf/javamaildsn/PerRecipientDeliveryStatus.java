@@ -65,6 +65,13 @@ public class PerRecipientDeliveryStatus {
 	private final DeliveryStatus deliveryStatus;
 	private final InternetHeaders headers;
 	
+	/**
+	 * Get the action performed by the reporting MTA as a result of its attempt
+	 * to deliver the message to the recipient address.
+	 *
+	 * @return an <code>Action</code> enum value indicating the action performed by the reporting MTA
+	 * @throws MessagingException if the DSN contained an invalid <tt>Action</tt> header
+	 */
 	public Action getAction() throws MessagingException {
 		String value = HeaderUtils.getRequiredUniqueHeader(headers, "Action");
 		try {
