@@ -7,7 +7,6 @@ import junit.framework.TestCase;
 import net.sf.javamaildsn.Diagnostic;
 import net.sf.javamaildsn.MailSystemStatus;
 import net.sf.javamaildsn.SMTPReply;
-import net.sf.javamaildsn.XPostfixRelayDiagnostic;
 
 /**
  * @author Andreas Veithen

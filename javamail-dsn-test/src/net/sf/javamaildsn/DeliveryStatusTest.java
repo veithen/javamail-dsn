@@ -7,6 +7,7 @@ import javax.mail.internet.InternetAddress;
 
 import junit.framework.TestCase;
 import net.sf.javamaildsn.PerRecipientDeliveryStatus.Action;
+import net.sf.javamaildsn.type.diagnostic.XPostfixRelayDiagnostic;
 
 /**
  * @author Andreas Veithen
