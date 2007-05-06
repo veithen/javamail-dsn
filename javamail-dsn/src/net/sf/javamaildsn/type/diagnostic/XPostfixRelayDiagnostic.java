@@ -1,6 +1,8 @@
-package net.sf.javamaildsn;
+package net.sf.javamaildsn.type.diagnostic;
 
-import net.sf.javamaildsn.type.diagnostic.PostfixMtaName;
+import net.sf.javamaildsn.MailSystemStatus;
+import net.sf.javamaildsn.SMTPReply;
+import net.sf.javamaildsn.StatusMessage;
 
 /**
  * @author Andreas Veithen

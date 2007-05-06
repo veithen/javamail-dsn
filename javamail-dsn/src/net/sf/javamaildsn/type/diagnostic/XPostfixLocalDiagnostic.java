@@ -1,4 +1,9 @@
-package net.sf.javamaildsn;
+package net.sf.javamaildsn.type.diagnostic;
+
+import net.sf.javamaildsn.MailSystemStatus;
+import net.sf.javamaildsn.MtaName;
+import net.sf.javamaildsn.SingleLineStatusMessage;
+import net.sf.javamaildsn.StatusMessage;
 
 /**
  * @author Andreas Veithen

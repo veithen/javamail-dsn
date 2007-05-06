@@ -8,9 +8,6 @@ import javax.mail.MessagingException;
 import net.sf.javamaildsn.DeliveryStatus;
 import net.sf.javamaildsn.PerRecipientDeliveryStatus;
 import net.sf.javamaildsn.SMTPReply;
-import net.sf.javamaildsn.XPostfixDiagnostic;
-import net.sf.javamaildsn.XPostfixLocalDiagnostic;
-import net.sf.javamaildsn.XPostfixRelayDiagnostic;
 import net.sf.javamaildsn.type.FieldType;
 
 /**

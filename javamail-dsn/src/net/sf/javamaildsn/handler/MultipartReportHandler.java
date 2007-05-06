@@ -1,4 +1,4 @@
-package net.sf.javamaildsn;
+package net.sf.javamaildsn.handler;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -9,7 +9,6 @@ import javax.mail.internet.ContentType;
 
 import net.sf.javamaildsn.MultipartReport;
 import net.sf.javamaildsn.MultipartReportDeliveryStatus;
-import net.sf.javamaildsn.SimpleDataContentHandler;
 
 /**
  * @author Andreas Veithen

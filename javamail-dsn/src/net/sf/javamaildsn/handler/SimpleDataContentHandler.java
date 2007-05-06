@@ -1,4 +1,4 @@
-package net.sf.javamaildsn;
+package net.sf.javamaildsn.handler;
 
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;

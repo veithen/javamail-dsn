@@ -1,4 +1,4 @@
-package net.sf.javamaildsn;
+package net.sf.javamaildsn.handler;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -7,7 +7,6 @@ import javax.activation.DataSource;
 import javax.mail.MessagingException;
 
 import net.sf.javamaildsn.DeliveryStatus;
-import net.sf.javamaildsn.SimpleDataContentHandler;
 
 /**
  * @author Andreas Veithen
