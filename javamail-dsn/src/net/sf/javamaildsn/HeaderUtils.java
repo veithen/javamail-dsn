@@ -118,11 +118,12 @@ public class HeaderUtils {
 		return matcher.matches() ? matcher.group(1) : value;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static String dumpHeaders(InternetHeaders headers) {
 		StringBuilder buffer = new StringBuilder();
-		Enumeration e = headers.getAllHeaderLines();
+		Enumeration<String> e = headers.getAllHeaderLines();
 		while (e.hasMoreElements()) {
-			buffer.append((String)e.nextElement());
+			buffer.append(e.nextElement());
 			buffer.append('\n');
 		}
 		return buffer.toString();

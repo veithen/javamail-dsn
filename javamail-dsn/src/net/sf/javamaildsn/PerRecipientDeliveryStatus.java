@@ -1,16 +1,11 @@
 package net.sf.javamaildsn;
 
 import java.io.InputStream;
-import java.util.Enumeration;
 
 import javax.mail.Address;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetHeaders;
 import javax.mail.internet.ParseException;
-
-import net.sf.javamaildsn.Diagnostic;
-import net.sf.javamaildsn.HeaderUtils;
-import net.sf.javamaildsn.MailSystemStatus;
 
 /**
  * @author Andreas Veithen
