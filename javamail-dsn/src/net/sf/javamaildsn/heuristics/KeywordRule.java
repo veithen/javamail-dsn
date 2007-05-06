@@ -11,10 +11,17 @@ public class KeywordRule implements Rule {
 		this.boundaryMatcher = boundaryMatcher;
 	}
 	
-	// TODO: if boundaries do not match then continue the search... (create test case for this)
 	public boolean matches(int code, MailSystemStatus status, String normalizedMessage) {
-		int startIndex = normalizedMessage.indexOf(keyword);
-		int endIndex = startIndex + keyword.length();
-		return startIndex != -1 && boundaryMatcher.matches(normalizedMessage, startIndex, endIndex);
+		int endIndex = 0;
+		while (true) {
+			int startIndex = normalizedMessage.indexOf(keyword, endIndex);
+			if (startIndex == -1) {
+				return false;
+			}
+			endIndex = startIndex + keyword.length();
+			if (boundaryMatcher.matches(normalizedMessage, startIndex, endIndex)) {
+				return true;
+			}
+		}
 	}
 }

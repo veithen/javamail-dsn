@@ -11,7 +11,7 @@ public class BoundaryMatcher {
 	}
 	
 	private boolean matches(char c) {
-		return Arrays.binarySearch(chars, c) != -1;
+		return Arrays.binarySearch(chars, c) >= 0;
 	}
 	
 	public boolean matches(String s, int startIndex, int endIndex) {
