@@ -1,6 +1,9 @@
 package net.sf.javamaildsn;
 
 import java.net.InetAddress;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
@@ -15,6 +18,16 @@ import net.sf.javamaildsn.type.diagnostic.XPostfixRelayDiagnostic;
 public class DeliveryStatusTest extends TestCase {
 	public void testDnsDomainLiteral() throws Exception {
 		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/dns-domain-literal"));
+		Calendar cal = new GregorianCalendar();
+		// Mon, 05 Jul 1999 14:55:26 -0400
+		cal.setTimeZone(TimeZone.getTimeZone("GMT-4:00"));
+		cal.set(Calendar.DAY_OF_MONTH, 5);
+		cal.set(Calendar.MONTH, Calendar.JULY);
+		cal.set(Calendar.YEAR, 1999);
+		cal.set(Calendar.HOUR_OF_DAY, 14);
+		cal.set(Calendar.MINUTE, 55);
+		cal.set(Calendar.SECOND, 26);
+		assertEquals(cal.getTime(), ds.getArrivalDate());
 		PerRecipientDeliveryStatus[] rdsArray = ds.getPerRecipientParts();
 		assertEquals(1, rdsArray.length);
 		PerRecipientDeliveryStatus rds = rdsArray[0];
@@ -86,7 +99,7 @@ public class DeliveryStatusTest extends TestCase {
 	public void testXPostfixHostSaid() throws MessagingException {
 		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/x-postfix-host-said"));
 		assertEquals("office.kde.org", ((DnsMtaName)ds.getReportingMta()).getDomainName());
-		PerRecipientDeliveryStatus rds = ds.getRecipientDeliveryStatus(new InternetAddress("kde-devel-request@kde.org"));
+		PerRecipientDeliveryStatus rds = ds.getPerRecipientParts()[0];
 		assertNotNull(rds);
 		assertEquals(Action.FAILED, rds.getAction());
 		assertEquals(new MailSystemStatus(5, 0, 0), rds.getStatus());
