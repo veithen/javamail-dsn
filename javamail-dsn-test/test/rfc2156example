@@ -1,0 +1,18 @@
+Reporting-MTA: x400; /PRMD=DGC/ADMD=GOLD 400/C=GB/
+Arrival-Date: Thu, 7 Feb 1991 15:48:40 +0000
+DSN-Gateway: dns;  bells.cs.ucl.ac.uk
+X400-Conversion-Date: Thu, 7 Feb 1991 15:49:12 +0000
+Original-Envelope-Id:
+  [/PRMD=uk.ac/ADMD=gold 400/C=gb/;<1796.665941626@UK.AC.UCL.CS>]
+X400-Content-Identifier: A useful mess...
+
+Original-Recipient: rfc822; j.nosuchuser@dle.cambridge.DGC.gold-400.gb
+Final-Recipient: x400;
+  /I=j/S=nosuchuser/OU=dle/O=cambridge/PRMD=DGC/ADMD=GOLD 400/C=GB/
+Action: failure
+Status: 5.1.1
+Diagnostic-Code: x400; Reason 1 (Unable-To-Transfer);
+    Diagnostic 0 (Unrecognised-ORName)
+X400-Supplementary-Info: "DG 21187: (CEO POA) Unknown addressee."
+X400-Originally-Specified-Recipient-Number: 1
+
