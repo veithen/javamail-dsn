@@ -1,0 +1,8 @@
+Reporting-MTA: dns;baton01.example.com
+
+Final-Recipient: rfc822;john.doe@example.com
+Action: failed
+Status: 5.0.0
+Remote-MTA: x-Notes;CN=MAIL11/OU=SVR/O=EXAMPLE
+Diagnostic-Code: X-Notes; Error transferring to MAIL11/SVR/EXAMPLE mail.box; Database is corrupt -- Cannot allocate space 
+
