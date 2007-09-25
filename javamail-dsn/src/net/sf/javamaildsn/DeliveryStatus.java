@@ -1,21 +1,14 @@
 package net.sf.javamaildsn;
 
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
 
-import javax.mail.Address;
 import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.InternetHeaders;
 import javax.mail.internet.MailDateFormat;
 import javax.mail.internet.ParseException;
-
-import net.sf.javamaildsn.HeaderUtils;
-import net.sf.javamaildsn.PerRecipientDeliveryStatus;
 
 /**
  * This class represents a <tt>message/delivery-status</tt> message as defined in RFC 1894 and 3464.
@@ -28,17 +21,18 @@ public class DeliveryStatus {
 	private static MailDateFormat mailDateFormat = new MailDateFormat();
 	
 	private final InternetHeaders headers;
-	private final Map<Address,PerRecipientDeliveryStatus> recip = new LinkedHashMap<Address,PerRecipientDeliveryStatus>();
+	private final List<PerRecipientDeliveryStatus> rdsList = new LinkedList<PerRecipientDeliveryStatus>();
 	
 	private MtaName cachedReportingMta;
+	
+	private boolean isArrivalDateCached;
+	private Date cachedArrivalDate;
 	
 	public DeliveryStatus(InputStream is) throws MessagingException {
 		headers = new InternetHeaders(is);
 		while (true) {
 			try {
-				PerRecipientDeliveryStatus recipDSN = new PerRecipientDeliveryStatus(this, is);
-				// TODO: we should also hash on original recipients
-				recip.put(recipDSN.getFinalRecipient(), recipDSN);
+				rdsList.add(new PerRecipientDeliveryStatus(this, is));
 			}
 			catch (MessagingException ex) {
 				// Suppose that this is because we reached the end of the input stream
@@ -112,50 +106,42 @@ public class DeliveryStatus {
 	 * if this information is not available
 	 */
 	public Date getArrivalDate() {
-		String value;
-		try {
-			value = HeaderUtils.getOptionalUniqueHeader(headers, "Arrival-Date");
-		}
-		catch (MessagingException ex) {
-			return null;
-		}
-		if (value == null) {
-			return null;
-		} else {
+		if (!isArrivalDateCached) {
+			String value = null;
 			try {
-				return mailDateFormat.parse(value);
+				value = HeaderUtils.getOptionalUniqueHeader(headers, "Arrival-Date");
 			}
-			catch (java.text.ParseException ex) {
-				return null;
+			catch (MessagingException ex) {
+				// Do nothing
 			}
+			if (value != null) {
+				try {
+					cachedArrivalDate = mailDateFormat.parse(value);
+				}
+				catch (java.text.ParseException ex) {
+					// Do nothing
+				}
+			}
+			isArrivalDateCached = true;
 		}
+		return (Date)cachedArrivalDate.clone();
 	}
 	
+	/**
+	 * Get the per recipient parts of the DSN.
+	 * 
+	 * @return an array of <code>PerRecipientDeliveryStatus</code> objects
+	 */
 	public PerRecipientDeliveryStatus[] getPerRecipientParts() {
-		Collection<PerRecipientDeliveryStatus> result = recip.values();
-		return result.toArray(new PerRecipientDeliveryStatus[result.size()]);
+		return rdsList.toArray(new PerRecipientDeliveryStatus[rdsList.size()]);
 	}
 	
-	public PerRecipientDeliveryStatus getRecipientDeliveryStatus(InternetAddress address) { return recip.get(address); }
-    
-	public Map<Address,Address> getAliases() {
-		Map<Address,Address> result = new HashMap<Address,Address>();
-		for (PerRecipientDeliveryStatus rdsn : recip.values()) {
-			Address orgRecipient = rdsn.getOriginalRecipient();
-			Address finalRecipient = rdsn.getFinalRecipient();
-			if (orgRecipient != null && !orgRecipient.equals(finalRecipient)) {
-				result.put(orgRecipient, finalRecipient);
-			}
-		}
-		return result;
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder buffer = new StringBuilder();
 		buffer.append(HeaderUtils.dumpHeaders(headers));
 		buffer.append('\n');
-		for (PerRecipientDeliveryStatus rds : recip.values()) {
+		for (PerRecipientDeliveryStatus rds : rdsList) {
 			buffer.append(rds);
 			buffer.append('\n');
 		}
