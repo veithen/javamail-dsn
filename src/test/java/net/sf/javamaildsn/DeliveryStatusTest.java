@@ -27,6 +27,7 @@ public class DeliveryStatusTest extends TestCase {
 		cal.set(Calendar.HOUR_OF_DAY, 14);
 		cal.set(Calendar.MINUTE, 55);
 		cal.set(Calendar.SECOND, 26);
+		cal.set(Calendar.MILLISECOND, 0);
 		assertEquals(cal.getTime(), ds.getArrivalDate());
 		PerRecipientDeliveryStatus[] rdsArray = ds.getPerRecipientParts();
 		assertEquals(1, rdsArray.length);
