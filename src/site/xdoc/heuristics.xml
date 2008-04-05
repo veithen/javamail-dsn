@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+    <properties>
+        <title>JavaMail DSN Toolkit</title>
+    </properties>
+    <body>
+        <section name="Heuristics">
+            <subsection name="Introduction">
+                <p>
+                Automatic processing of DSNs generally requires to identify the reason why the
+                delivery failed. Usually it will be sufficient to classify failure reasons into the
+                following three categories:
+                </p>
+                <dl>
+                  <dt>ADDRESS</dt>
+                  <dd>
+                    <p>
+                    The delivery failed because the recipient address was invalid, either because the domain doesn't exist
+                    or the local part is unknown at the recipient site. Any future delivery to the same address will also fail.
+                    </p>
+                  </dd>
+                  <dt>QUOTA</dt>
+                  <dd>
+                    <p>
+                    Delivery failed because the recipient's mailbox was full. Future deliveries of the same message or a
+                    message with a different content are likely to succeed.
+                    </p>
+                  </dd>
+                  <dt>POLICY</dt>
+                  <dd>
+                    <p>
+                    Delivery failed because some MTA decided to reject the message for policy reasons. Future deliveries
+                    of the same message will cause the same failure. However delivery of a message with a different content
+                    has a chance to succeed.
+                    </p>
+                  </dd>
+                </dl>
+            </subsection>
+            <subsection name="The reliability of status codes">
+                <p>
+                The per recipient part of a DSN contains a field that indicates the delivery status as specified by RFC 3463.
+                In principle this status code should be sufficient to identify the reason of a delivery failure. For example
+                the RFC unambiguously defines 5.1.1 as the status code for a failure due to the local part of the address
+                being invalid. However in many cases, the information reported in the DSN is either not useful, because some
+                unspecific status code, or not reliable because the status code doesn't match the real failure reason.
+                </p>
+                <p>
+                In the following example, it can be clearly seen that the delivery failed because the recipient address
+                doesn't exist. However the status code is 5.0.0, which is defined as "Other undefined Status":
+                </p>
+                <pre>
+                Final-Recipient: rfc822; xxxxxxxxx@example.com
+                Action: failed
+                Status: 5.0.0
+                Diagnostic-Code: X-Postfix;
+                        &lt;xxxxxxxxx@example.com&gt;: Recipient address rejected: User
+                        unknown in local recipient table
+                </pre>
+                <p>
+                In the second example below, the status code is 5.2.2 "Mailbox full", whereas the message has been rejected
+                for policy reasons:
+                </p>
+                <pre>
+                Final-Recipient: RFC822; cygwin-xfree@cygwin.com
+                Action: failed
+                Status: 5.2.2
+                Remote-MTA: DNS; sourceware.org
+                Diagnostic-Code: SMTP; 552 we don't accept email with executable content (#5.3.4)
+                Last-Attempt-Date: Mon, 1 Nov 2004 16:25:28 +0200 (IST)
+                </pre>
+                <p>
+                Also note the presence of another status code 5.3.4 indicated in the <tt>Diagnostic-Code</tt> field.
+                This status is defined as "Message too big for system" which also doesn't match the real failure reason,
+                but which nevertheless would lead to the correct classification (failure due to policy).
+                </p>
+                <p>
+                Further analysis of the problem reveals that the reliability and usefulness of the status code
+                actually depends on the context in which the DSN has been created. Two cases can be distinguished:
+                </p>
+                <ol>
+                  <li>
+                    <p>
+                    The reporting MTA (i.e. the MTA that generated the DSN) itself decided to reject the message.
+                    This means that the MTA accepted and queued the message during the SMTP transaction, but
+                    later rejected the message and sent a DSN to report the delivery failure.
+                    </p>
+                    <p>
+                    In this case the status code can be assumed to give reliable information. Indeed reporting a
+                    status code not matching the real failure reason would indicate a bug in the MTA.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                    The decision to reject the message was not taken by the reporting MTA itself, but by a remote
+                    MTA during the SMTP transaction that attempted to deliver the message.
+                    In other words the reporting MTA tried to deliver the message to a remote MTA which
+                    immediatly rejected the message during the SMTP transaction.
+                    </p>
+                    <p>
+                    The remote MTA reports its decision to reject the message by returning a negative completion
+                    reply in response to the <tt>RCPT TO</tt> or <tt>DATA</tt> command.
+                    As specified in RFC 821, an SMTP reply consists of a three digit reply code followed by
+                    some text meant for the human user. The problem comes from the fact that reply codes and
+                    status codes are distinct concepts and don't carry the same information. More specifically,
+                    RFC 3463 introduced status codes to better describe error conditions than the reply codes
+                    defined by RFC 821 do. Therefore there is no reliable way to translate SMTP replies to
+                    status codes, and status codes contained in DSNs generated under these conditions should
+                    not be taken into account. At best they will be useless, at worst they won't match the
+                    real failure reason.
+                    </p>
+                    <p>
+                    Note however that some MTAs choose to include an RFC 3463 status code in the text part of
+                    the SMTP reply. Since the scope of RFC 3463 is limited to DSNs, it doesn't specify a standard
+                    way to do this. However, there seem to be two common syntaxes that are used, as shown in the
+                    following examples:
+                    </p>
+                    <pre>
+                    550 5.7.1 Mail from 10.1.12.124 refused by blackhole site relays.osirusoft.com
+                    553 sorry, that domain isn't in my list of allowed rcpthosts (#5.7.1)
+                    </pre>
+                    <p>
+                    As can be seen in the second example at the beginning of this section, the reporting MTA
+                    usually doesn't use this information. Indeed in the example, the remote MTA returned
+                    status code 5.3.4, but the reporting MTA indicated 5.2.2 in the DSN, based on the
+                    reply code 552.
+                    </p>
+                  </li>
+                </ol>
+                <p>
+                The JavaMail DSN Toolkit follows these findings by relying on the following decision table to
+                select the status code to be used when analysing DSNs:
+                </p>
+                <table>
+                  <tr><th>Message rejected by:</th><th>Status code available in SMTP reply?</th><th>Status code used:</th></tr>
+                  <tr><td>Reporting MTA</td><td>N/A</td><td>From DSN</td></tr>
+                  <tr><td>Remote MTA</td><td>Yes</td><td>From SMTP reply</td></tr>
+                  <tr><td>Remote MTA</td><td>No</td><td>None</td></tr>
+                </table>
+                <p>
+                These rules are implemented by the <code>SMTPDiagnosticType</code> and <code>XPostfixDiagnosticType</code> classes.
+                [TODO: this is not entirely correct for <code>SMTPDiagnosticType</code>]
+                </p>
+            </subsection>
+        </section>
+    </body>
+</document>
