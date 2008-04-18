@@ -11,6 +11,27 @@ import net.sf.javamaildsn.SMTPReply;
 import net.sf.javamaildsn.type.FieldType;
 
 /**
+ * Implementation of the <tt>smtp</tt> type for the <tt>Diagnostic-Code</tt> DSN field.
+ * <p>
+ * This type is described in section 9.2 of RFC3461:
+ * <blockquote>
+ * An SMTP diagnostic-code is of the form
+ * <pre>
+ *    *( 3*DIGIT "-" *text ) 3*DIGIT SPACE *text</pre>
+ * For a single-line SMTP reply to an SMTP command, the
+ * diagnostic-code SHOULD be an exact transcription of the reply.
+ * For multi-line SMTP replies, it is necessary to insert a SPACE
+ * before each line after the first.  For example, an SMTP reply
+ * of:
+ * <pre>
+ *    550-mailbox unavailable
+ *    550 user has moved with no forwarding address</pre>
+ * could appear as follows in a Diagnostic-Code DSN field:
+ * <pre>
+ *    Diagnostic-Code: smtp ; 550-mailbox unavailable
+ *     550 user has moved with no forwarding address</pre>
+ * </blockquote>
+ * 
  * @author Andreas Veithen
  */
 public class SMTPDiagnosticType implements FieldType<SMTPDiagnostic> {

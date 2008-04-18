@@ -10,6 +10,8 @@ import net.sf.javamaildsn.DeliveryStatus;
 import net.sf.javamaildsn.PerRecipientDeliveryStatus;
 
 /**
+ * Parser for typed fields as described by RFC????. 
+ * 
  * @author Andreas Veithen
  */
 public class TypedFieldParser<T> {
