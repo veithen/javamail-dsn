@@ -17,7 +17,7 @@ import net.sf.javamaildsn.type.diagnostic.XPostfixRelayDiagnostic;
  */
 public class DeliveryStatusTest extends TestCase {
 	public void testDnsDomainLiteral() throws Exception {
-		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/dns-domain-literal"));
+		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/dsn/dns-domain-literal"));
 		Calendar cal = new GregorianCalendar();
 		// Mon, 05 Jul 1999 14:55:26 -0400
 		cal.setTimeZone(TimeZone.getTimeZone("GMT-4:00"));
@@ -37,7 +37,7 @@ public class DeliveryStatusTest extends TestCase {
 	}
 	
 	public void testMultilineSmtpDiagnostic() throws Exception {
-		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/multiline-smtp-diagnostic"));
+		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/dsn/multiline-smtp-diagnostic"));
 		assertEquals("mail.tamay-dogan.net", ((DnsMtaName)ds.getReportingMta()).getDomainName());
 		assertEquals("localhost", ((DnsMtaName)ds.getReceivedFromMta()).getDomainName());
 		PerRecipientDeliveryStatus[] rdsArray = ds.getPerRecipientParts();
@@ -61,7 +61,7 @@ public class DeliveryStatusTest extends TestCase {
 	}
 	
 	public void testMultilineSmtpDiagnostic2() throws MessagingException {
-		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/multiline-smtp-diagnostic-2"));
+		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/dsn/multiline-smtp-diagnostic-2"));
 		assertEquals("ex.hexago.com", ((DnsMtaName)ds.getReportingMta()).getDomainName());
 		PerRecipientDeliveryStatus[] rdsArray = ds.getPerRecipientParts();
 		assertEquals(1, rdsArray.length);
@@ -85,20 +85,20 @@ public class DeliveryStatusTest extends TestCase {
 	}
 	
 	public void testReceivedFromMta() throws Exception {
-		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/received-from-mta"));
+		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/dsn/received-from-mta"));
 		DnsMtaName mtaName = (DnsMtaName)ds.getReceivedFromMta();
 		assertEquals("inbound-mx1.atl.registeredsite.com", mtaName.getDomainName());
 		assertEquals(InetAddress.getByName("64.224.219.89"), mtaName.getAddress());
 	}
 	
 	public void testStatusWithComment() throws MessagingException {
-		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/status-with-comment"));
+		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/dsn/status-with-comment"));
 		PerRecipientDeliveryStatus rds = ds.getPerRecipientParts()[0];
 		assertEquals(new MailSystemStatus(5, 2, 3), rds.getStatus());
 	}
 	
 	public void testXPostfixHostSaid() throws MessagingException {
-		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/x-postfix-host-said"));
+		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/dsn/x-postfix-host-said"));
 		assertEquals("office.kde.org", ((DnsMtaName)ds.getReportingMta()).getDomainName());
 		PerRecipientDeliveryStatus rds = ds.getPerRecipientParts()[0];
 		assertNotNull(rds);
@@ -118,7 +118,7 @@ public class DeliveryStatusTest extends TestCase {
 	}
 	
 	public void testXPostfixMultilineLMTP() throws MessagingException {
-		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/x-postfix-host-said-multiline-lmtp"));
+		DeliveryStatus ds = new DeliveryStatus(getClass().getResourceAsStream("/dsn/x-postfix-host-said-multiline-lmtp"));
 		PerRecipientDeliveryStatus[] rdsArray = ds.getPerRecipientParts();
 		assertEquals(1, rdsArray.length);
 		PerRecipientDeliveryStatus rds = rdsArray[0];
