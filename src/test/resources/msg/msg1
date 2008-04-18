@@ -1,0 +1,71 @@
+Return-Path: <MAILER-DAEMON@secure-mail.be>
+Received: from gate.veithen.net ([unix socket])
+	by gate.veithen.net (Cyrus v2.1.18-IPv6-Debian-2.1.18-5.1) with LMTP; Fri, 18 Apr 2008 22:50:49 +0200
+X-Sieve: CMU Sieve 2.2
+Received: from gate.veithen.net (localhost [127.0.0.1])
+	by gate.veithen.net (Postfix) with ESMTP id CD0FB54077
+	for <veithen@localhost>; Fri, 18 Apr 2008 22:50:48 +0200 (CEST)
+Received: from pop3pool001.isp.belgacom.be [195.238.5.116]
+	by gate.veithen.net with POP3 (fetchmail-6.3.8)
+	for <veithen@localhost> (single-drop); Fri, 18 Apr 2008 22:50:48 +0200 (CEST)
+Received: from mailrelay004.isp.belgacom.be (mailrelay004.isp.belgacom.be [195.238.6.170])
+	by maildelivery007.isp.belgacom.be (Postfix) with ESMTP id 59B8545C063
+	for <andreas.veithen@skynet.be>; Fri, 18 Apr 2008 22:49:47 +0200 (CEST)
+Received: from localhost by mailrelay004.isp.belgacom.be;
+  18 Apr 2008 22:49:47 +0200
+Date: 18 Apr 2008 22:49:47 +0200
+To: andreas.veithen@skynet.be
+From: "Mail Delivery System" <MAILER-DAEMON@secure-mail.be>
+Subject: Delivery Status Notification (Failure)
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status; boundary="7C9nJ.4IolZ+QKe.11XxEh.4T63tgx"
+Message-Id: <20080418204947.59B8545C063@maildelivery007.isp.belgacom.be>
+X-UIDL: 00000000002016f2.00002956
+X-MSP-STORE: Fri, 18 Apr 2008 22:48:38 +0200
+
+--7C9nJ.4IolZ+QKe.11XxEh.4T63tgx
+content-type: text/plain;
+    charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+The following message to <onhczkanerz@gmx.de> was undeliverable.
+The reason for the problem:
+5.1.0 - Unknown address error 550-'5.1.1 <onhczkanerz@gmx.de>... User is un=
+known {mx026}'
+
+--7C9nJ.4IolZ+QKe.11XxEh.4T63tgx
+content-type: message/delivery-status
+
+Reporting-MTA: dns; mailrelay004.isp.belgacom.be
+
+Final-Recipient: rfc822;onhczkanerz@gmx.de
+Action: failed
+Status: 5.0.0 (permanent failure)
+Remote-MTA: dns; [213.165.64.100]
+Diagnostic-Code: smtp; 5.1.0 - Unknown address error 550-'5.1.1 <onhczkanerz@gmx.de>... User is unknown {mx026}' (delivery attempts: 0)
+
+--7C9nJ.4IolZ+QKe.11XxEh.4T63tgx
+content-type: message/rfc822
+
+Received: from 102.169-200-80.adsl-dyn.isp.belgacom.be (HELO gate.veithen.net) ([80.200.169.102])
+  by relay.skynet.be with ESMTP; 18 Apr 2008 22:49:35 +0200
+Received: from 102.169-200-80.adsl-dyn.isp.belgacom.be (HELO gate.veithen.net) ([80.200.169.102])
+  by relay.skynet.be with ESMTP; 18 Apr 2008 22:49:35 +0200
+Received: from orcus.veithen.net (orcus.veithen.net [192.168.1.5])
+	by gate.veithen.net (Postfix) with ESMTP id BE89D54077
+	for <onhczkanerz@gmx.de>; Fri, 18 Apr 2008 22:49:34 +0200 (CEST)
+Message-Id: <0E9FED53-50B0-4178-8C35-0AA0CF2ACD04@skynet.be>
+From: Andreas Veithen <andreas.veithen@skynet.be>
+To: onhczkanerz@gmx.de
+Content-Type: text/plain; charset=US-ASCII; format=flowed
+Content-Transfer-Encoding: 7bit
+Mime-Version: 1.0 (Apple Message framework v919.2)
+Subject: Test
+Date: Fri, 18 Apr 2008 22:49:34 +0200
+X-Mailer: Apple Mail (2.919.2)
+
+Test message.
+
+--7C9nJ.4IolZ+QKe.11XxEh.4T63tgx--
+
+
