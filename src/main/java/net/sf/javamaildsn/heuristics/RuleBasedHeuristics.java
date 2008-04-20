@@ -16,7 +16,7 @@ public class RuleBasedHeuristics implements Heuristics {
 	public static synchronized RuleBasedHeuristics getDefaultInstance() throws RuleBasedHeuristicsFactoryException {
 		if (defaultInstance == null) {
 			RuleBasedHeuristicsFactory factory = new RuleBasedHeuristicsFactory();
-			BoundaryMatcher boundaryMatcher = new BoundaryMatcher(new char[] { ' ', '.', ':', '(', ')', '"' });
+			BoundaryMatcher boundaryMatcher = new BoundaryMatcher(new char[] { ' ', '.', ':', '(', ')', '"', '/' });
 			factory.addRuleParser("keywords", new KeywordRuleParser(boundaryMatcher));
 			factory.addRuleParser("pattern", new PatternRuleParser(boundaryMatcher));
 			factory.addRuleParser("status", new StatusRuleParser());

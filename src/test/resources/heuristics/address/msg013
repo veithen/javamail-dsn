@@ -1,0 +1,10 @@
+Reporting-MTA: dns; outmx012.isp.belgacom.be
+Arrival-Date: Mon, 26 Mar 2007 00:07:42 +0200
+
+Final-Recipient: RFC822; xxxxxxx@web.de
+Action: failed
+Status: 5.1.1
+Remote-MTA: DNS; mx-ha01.web.de
+Diagnostic-Code: SMTP; 550 <xxxxxxx@web.de> Benutzer nicht bekannt/User unknown
+Last-Attempt-Date: Mon, 26 Mar 2007 00:07:43 +0200
+

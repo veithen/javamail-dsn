@@ -24,4 +24,14 @@ public class KeywordRuleTest extends TestCase {
 		String normalizedMessage = RuleBasedHeuristics.normalizeMessage("xxx nomatch match xxx");
 		assertTrue(new KeywordRule("match", boundaryMatcher).matches(-1, null, normalizedMessage));
 	}
+	
+    public void test5() {
+        String normalizedMessage = RuleBasedHeuristics.normalizeMessage("match xxx");
+        assertTrue(new KeywordRule("match", boundaryMatcher).matches(-1, null, normalizedMessage));
+    }
+    
+    public void test6() {
+        String normalizedMessage = RuleBasedHeuristics.normalizeMessage("xxx match");
+        assertTrue(new KeywordRule("match", boundaryMatcher).matches(-1, null, normalizedMessage));
+    }
 }

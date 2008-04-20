@@ -24,4 +24,9 @@ public class KeywordRule implements Rule {
 			}
 		}
 	}
+
+    @Override
+    public String toString() {
+        return "keyword: '" + keyword + "'";
+    }
 }
