@@ -2,6 +2,11 @@ package net.sf.javamaildsn.type.diagnostic;
 
 import net.sf.javamaildsn.MtaName;
 
+/**
+ * MTA name as reported by Postfix.
+ * 
+ * @author Andreas Veithen
+ */
 public class PostfixMtaName implements MtaName {
 	private final String name;
 	private final String address;

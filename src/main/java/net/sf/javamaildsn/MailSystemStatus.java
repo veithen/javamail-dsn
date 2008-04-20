@@ -1,5 +1,6 @@
 package net.sf.javamaildsn;
 
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -44,9 +45,22 @@ public class MailSystemStatus {
 		}
 	}
 	
-	public String getCanonicalMessage() {
-		return messages.getString(subject + "." + detail);
-	}
+    /**
+     * Get the canonical message for this mail system status.
+     * <p>
+     * The messages returned by this method are those defined in Appendix A of RFC 3463.
+     * 
+     * @return the canonical message or null, if there is no canonical message defined
+     *         for this mail system status
+     */
+    public String getCanonicalMessage() {
+        try {
+            return messages.getString(subject + "." + detail);
+        }
+        catch (MissingResourceException ex) {
+            return null;
+        }
+    }
 	
 	@Override
 	public String toString() {

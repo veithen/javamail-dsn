@@ -5,6 +5,8 @@ import javax.mail.Address;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
+ * {@link Address} implementation for unknown address types.
+ * 
  * @author Andreas Veithen
  */
 public class UnknownAddress extends Address {
