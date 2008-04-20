@@ -8,6 +8,7 @@ import net.sf.javamaildsn.PerRecipientDeliveryStatus;
 /**
  * @author Andreas Veithen
  */
+// TODO: consider renaming this TypeHandler
 public interface FieldType<T> {
 	/**
 	 * 

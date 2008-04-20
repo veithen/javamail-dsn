@@ -1,0 +1,2 @@
+dns=net.sf.javamaildsn.type.mtaname.DnsMtaNameType
+*=net.sf.javamaildsn.type.mtaname.UnknownMtaNameType

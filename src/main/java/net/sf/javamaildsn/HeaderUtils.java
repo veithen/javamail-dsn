@@ -10,33 +10,12 @@ import javax.mail.internet.InternetHeaders;
 import javax.mail.internet.ParseException;
 
 import net.sf.javamaildsn.type.TypedFieldParser;
-import net.sf.javamaildsn.type.address.RFC822AddressType;
-import net.sf.javamaildsn.type.address.UnknownAddressType;
-import net.sf.javamaildsn.type.diagnostic.SMTPDiagnosticType;
-import net.sf.javamaildsn.type.diagnostic.UnknownDiagnosticType;
-import net.sf.javamaildsn.type.diagnostic.XPostfixDiagnosticType;
-import net.sf.javamaildsn.type.mtaname.DnsMtaNameType;
-import net.sf.javamaildsn.type.mtaname.UnknownMtaNameType;
 
 /**
  * @author Andreas Veithen
  */
 // TODO: Section 2.1.1 of RFC 3464 says that "Text that appears in parentheses is considered a comment and not part of the contents of that notification field."
 public class HeaderUtils {
-	private static final TypedFieldParser<MtaName> mtaNameParser = new TypedFieldParser<MtaName>();
-	private static final TypedFieldParser<Address> addressParser = new TypedFieldParser<Address>();
-	private static final TypedFieldParser<Diagnostic> diagnosticParser = new TypedFieldParser<Diagnostic>();
-	
-	static {
-		mtaNameParser.addType("dns", new DnsMtaNameType());
-		mtaNameParser.setDefaultType(new UnknownMtaNameType());
-		addressParser.addType("rfc822", new RFC822AddressType());
-		addressParser.setDefaultType(new UnknownAddressType());
-		diagnosticParser.addType("smtp", new SMTPDiagnosticType());
-		diagnosticParser.addType("x-postfix", new XPostfixDiagnosticType());
-		diagnosticParser.setDefaultType(new UnknownDiagnosticType());
-	}
-	
 	/**
 	 * Get the value of a header with multiplicity 0..1, i.e. that is unique but optional.
 	 * 
@@ -87,7 +66,7 @@ public class HeaderUtils {
 	 * @throws MessagingException if the MTA name type is not "dns"
 	 */
 	public static MtaName parseMtaName(String value, DeliveryStatus ds, PerRecipientDeliveryStatus rds) throws MessagingException {
-		return mtaNameParser.parse(value, ds, rds);
+		return TypedFieldParser.getInstance(MtaName.class).parse(value, ds, rds);
 	}
 	
 	/**
@@ -103,12 +82,12 @@ public class HeaderUtils {
 	 * @throws MessagingException if the address type is unrecognized
 	 */
 	public static Address parseAddress(String value, DeliveryStatus ds, PerRecipientDeliveryStatus rds) throws MessagingException {
-		return addressParser.parse(value, ds, rds);
+		return TypedFieldParser.getInstance(Address.class).parse(value, ds, rds);
 	}
 	
 	// TODO: this is probably used only once; so move this
 	public static Diagnostic parseDiagnostic(String value, DeliveryStatus ds, PerRecipientDeliveryStatus rds) throws MessagingException {
-		return diagnosticParser.parse(value, ds, rds);
+		return TypedFieldParser.getInstance(Diagnostic.class).parse(value, ds, rds);
 	}
 	
 	private final static Pattern commentPattern = Pattern.compile("(.*)\\s\\(.*\\)");

@@ -1,0 +1,3 @@
+smtp=net.sf.javamaildsn.type.diagnostic.SMTPDiagnosticType
+x-postfix=net.sf.javamaildsn.type.diagnostic.XPostfixDiagnosticType
+*=net.sf.javamaildsn.type.diagnostic.UnknownDiagnosticType

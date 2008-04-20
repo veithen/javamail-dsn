@@ -1,0 +1,2 @@
+rfc822=net.sf.javamaildsn.type.address.RFC822AddressType
+*=net.sf.javamaildsn.type.address.UnknownAddressType
